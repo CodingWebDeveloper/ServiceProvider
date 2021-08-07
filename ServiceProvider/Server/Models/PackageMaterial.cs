@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace ServiceProvider.Server.Models
 {
-    public class Material
+    public class PackageMaterial
     {
-        public Material()
-        {
-            this.Packages = new HashSet<PackageMaterial>();
-        }
-
         [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public int PackageId { get; set; }
 
-        public virtual ICollection<PackageMaterial> Packages { get; set; }
+        public virtual Package Package { get; set; }
+
+        public int MaterialId { get; set; }
+
+        public virtual Material Material { get; set; }
     }
 }

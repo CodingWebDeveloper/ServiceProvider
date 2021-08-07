@@ -1,8 +1,10 @@
+using MatBlazor;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ServiceProvider.Client.Services;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -23,8 +25,11 @@ namespace ServiceProvider.Client
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("ServiceProvider.ServerAPI"));
-
             builder.Services.AddApiAuthorization();
+            builder.Services.AddTransient<ISkillsService, SkillsService>();
+            builder.Services.AddTransient<ICategoriesService, CategoriesService>();
+            builder.Services.AddTransient<IServicesService, ServicesService>();
+            builder.Services.AddTransient<IRequirementsService, RequirementsService>();
 
             await builder.Build().RunAsync();
         }

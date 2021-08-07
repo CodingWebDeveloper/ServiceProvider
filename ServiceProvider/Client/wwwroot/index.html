@@ -21,6 +21,22 @@
     </div>
     <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        function showAddForm() {
+            const form = document.getElementById('input-form');
+            form.style.display = "flex";
+        }
+
+        function hidAddForm() {
+            const form = document.getElementById('input-form');
+            form.style.display = "none";
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 
 </html>
+

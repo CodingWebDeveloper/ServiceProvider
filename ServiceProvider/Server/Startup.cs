@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ServiceProvider.Server.Data;
 using ServiceProvider.Server.Models;
+using ServiceProvider.Server.Services;
 using System.Linq;
 
 namespace ServiceProvider.Server
@@ -26,6 +27,7 @@ namespace ServiceProvider.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -40,6 +42,13 @@ namespace ServiceProvider.Server
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
+            services.AddTransient<ISkillsService, SkillsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IServicesService, ServicesService>();
+            services.AddTransient<IRequirementsService, RequirementsService>();
+            services.AddTransient<IMaterialsService, MaterialsService>();
+            services.AddTransient<IPackagesService, PackagesService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

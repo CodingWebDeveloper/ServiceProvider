@@ -10,7 +10,7 @@ namespace ServiceProvider.Server.Models
     {
         public Package()
         {
-            this.Materials = new HashSet<Material>();
+            this.Materials = new HashSet<PackageMaterial>();
             this.Orders = new HashSet<Order>();
         }
 
@@ -20,6 +20,8 @@ namespace ServiceProvider.Server.Models
 
         public string Title { get; set; }
 
+        public string Details { get; set; }
+
         public double Price { get; set; }
 
         public int ServiceId { get; set; }
@@ -28,7 +30,7 @@ namespace ServiceProvider.Server.Models
 
         public TypeOfPackage PackageType { get; set; }
 
-        public virtual ICollection<Material> Materials { get; set; }
+        public virtual ICollection<PackageMaterial> Materials { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }

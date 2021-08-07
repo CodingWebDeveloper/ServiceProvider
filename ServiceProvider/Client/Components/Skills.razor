@@ -1,0 +1,27 @@
+﻿<style>
+    .btn:hover{
+        cursor:pointer;
+    }
+</style>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Skill</th>
+            <th class="d-flex align-items-center" scope="col">
+                <div class="flex-grow-1">
+                    Level
+                </div>
+                <div @onclick="ShowAddForm" class="btn d-inline-flex text-success bg-transparent text-decoration-none border border-white pointer-event">Add Skill</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var skill in this.AllSkills)
+	    {
+            <tr>
+                <td>@skill.Name</td>
+                <td>@skill.ExperienceType</td>
+            </tr>
+	    }
+    </tbody>
+</table>

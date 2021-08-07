@@ -48,5 +48,7 @@ namespace ServiceProvider.Server.Data
         public virtual DbSet<UserOccupation> UserOccupations { get; set; }
 
         public virtual DbSet<UserSkill> UserSkills { get; set; }
+
+        public virtual DbSet<PackageMaterial> PackageMaterials { get; set; }
     }
 }

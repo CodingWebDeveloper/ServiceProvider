@@ -1,0 +1,55 @@
+﻿@page "/categories"
+<h3>AllCategories</h3>
+
+<style>
+    #input-form {
+        display: none;
+        padding: 1rem;
+        justify-content: start;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    }
+
+    .item-wr{
+        margin-right: 10px;
+    }
+
+    .btn:hover{
+        cursor:pointer;
+    }
+</style>
+
+<EditForm id="input-form" Model="@this.model" OnValidSubmit="@Create">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label class="item-wr">Category</label>
+    <InputText class="text-black-50 item-wr" @bind-Value="@this.model.Name" placholder="Category Name"/>
+    <button type="submit" class="btn btn-success text-white item-wr">Create</button>
+</EditForm>
+
+<main>
+    <section class="d-flex justify-content-center align-items-center">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="d-flex" scope="col">
+                        <div class="flex-grow-1 align-items-center">
+                            Name
+                        </div>
+                        <div  onclick="showAddForm()" class="btn d-inline-flex text-success bg-transparent text-decoration-none border border-white">Add Category</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var skill in this.categories)
+                {
+                    <tr>
+                        <td>@skill.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</main>
