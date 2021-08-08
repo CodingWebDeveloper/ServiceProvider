@@ -29,5 +29,12 @@ namespace ServiceProvider.Server.Controllers
             int serviceId = await this.servicesService.CreateAsync(inputModel);
             return this.Ok(serviceId);
         }
+
+        [HttpGet]
+        public IActionResult GetAllBy()
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return this.Ok(this.servicesService.GetAllBy<ServiceViewModel>(userId));
+        }
     }
 }

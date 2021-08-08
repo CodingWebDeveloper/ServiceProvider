@@ -9,5 +9,7 @@ namespace ServiceProvider.Server.Services
     public interface IServicesService
     {
         Task<int> CreateAsync(CreateServiceInputModel inputModel);
+
+        IEnumerable<T> GetAllBy<T>(string userId);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ServiceProvider.Shared.Categories;
-using ServiceProvider.Shared.Packages;
 using ServiceProvider.Shared.Requirements;
 using System;
 using System.Collections.Generic;

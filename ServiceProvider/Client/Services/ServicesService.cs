@@ -30,5 +30,10 @@ namespace ServiceProvider.Client.Services
 
             return await httpResponse.Content.ReadFromJsonAsync<int>();
         }
+
+        public async Task<IEnumerable<T>> GetAllByUserId<T>()
+        {
+            return await this.httpClient.GetFromJsonAsync<IEnumerable<T>>("api/services");
+        }
     }
 }

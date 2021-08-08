@@ -20,7 +20,7 @@ namespace ServiceProvider.Server.Services
 
         public async Task CreateAsync(CreatePackageInputModel inputModel)
         {
-            Package package = new Package()
+            Package package = new()
             {
                 Title = inputModel.Title,
                 Details = inputModel.Details,
@@ -30,7 +30,20 @@ namespace ServiceProvider.Server.Services
                 Price = inputModel.Price,
             };
 
-            await this.dbContext.AddAsync(package);
+            foreach (var material in inputModel.Materials)
+            {
+                PackageMaterial newMaterial = new PackageMaterial()
+                {
+                    Material = new Material() 
+                    {
+                        Name = material.Name
+                    },
+                };
+
+                package.Materials.Add(newMaterial);
+            }
+
+            await this.dbContext.Packages.AddAsync(package);
             await this.dbContext.SaveChangesAsync();
         }
     }

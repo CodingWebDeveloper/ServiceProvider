@@ -30,6 +30,7 @@ namespace ServiceProvider.Client
             builder.Services.AddTransient<ICategoriesService, CategoriesService>();
             builder.Services.AddTransient<IServicesService, ServicesService>();
             builder.Services.AddTransient<IRequirementsService, RequirementsService>();
+            builder.Services.AddTransient<IPackagesService, PackagesService>();
 
             await builder.Build().RunAsync();
         }

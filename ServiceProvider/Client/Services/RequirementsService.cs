@@ -13,7 +13,6 @@ namespace ServiceProvider.Client.Services
         private readonly HttpClient httpClient;
         private const string REQUIREMENTS_HREF = "api/requirements";
 
-        private string errorMessage;
 
         public RequirementsService(HttpClient httpClient)
         {

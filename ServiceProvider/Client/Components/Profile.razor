@@ -5,10 +5,68 @@
         padding: 1rem;
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     }
+
+    .img{
+        width: 200px;
+        height: 200px;
+    }
+   
+    .row-margin-20{
+        margin:2.0em;
+    }
+
+    .link{
+        color:black;
+    }
+
+    .link:hover{
+        color:limegreen;
+        cursor:pointer;
+        text-decoration:none;
+    }
 </style>
 <h3>Profile</h3>
 
 <div class="container">
     <p class="flex-grow-1">Create your service and start making money</p>
     <a class="btn btn-success d-md-inline" href="createService">Create Service</a>
+</div>
+
+<div class="row">
+    @foreach (var service in this.services)
+    {
+         <div class="card col-md-4 rounded row-margin-20" style="min-width:initial; min-height:initial">
+             @if (service.Images.Any())
+             {
+                 @foreach (var image in service.Images)
+                 {
+                    <img class="img" src="@image.RemoteUrl" alt="SlideImage" />
+                 }
+             }
+             else
+             {
+                 <div class="card-body d-flex justify-content-center align-items-center position-relative" style="width:contain">
+                     <div class="img d-flex flex-fill bg-secondary justify-content-center align-items-center">
+                         <svg xmlns="http://www.w3.org/2000/svg" height="20px" width="20px" viewBox="0 0 20 20" fill="currentColor">
+                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                         </svg>
+                     </div>
+                 </div>
+             }
+
+             <div class="card-footer d-flex">
+                 <div class="flex-grow-1">
+                     <p>
+                         <a class="link" href="#">
+                             @service.Title
+                         </a>
+                     </p>
+                     <p>Rating: @service.Rating</p>
+                 </div>
+                 <div>
+                     <p>$@service.StartingPrice</p>
+                 </div>
+             </div>
+         </div>
+    }
 </div>

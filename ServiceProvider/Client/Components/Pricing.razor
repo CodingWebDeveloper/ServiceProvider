@@ -4,13 +4,195 @@
     .container-pricing{
         display:grid;
     }
+
+    .package{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border:1px solid #dee2e6;
+        width: inherit;
+        height:inherit;
+        position:relative;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .package-item{
+        border:1px solid #dee2e6;
+        align-items:start;
+        justify-content:start;
+        width:inherit;
+        height:6.8rem;
+        font-size:10px;
+        position:relative;
+        display:flex;
+    }
+
+    .package-items {
+        height: 5rem;
+        width: 10rem;
+    }
+
+    .svg{
+        height: 25px;
+        width: 25px;
+    }
+
+    .material-item {
+        display:flex;
+        border: 1px solid #dee2e6;
+        height: 5rem;
+        width: 10rem;
+        align-items: start;
+        justify-content:flex-start;
+    }
+
+    .svg:hover{
+        cursor:pointer;
+        transform:scale(1.05);
+        transition: transform 250ms ease-in;
+    }
 </style>
 <h3>Pricing</h3>
 <hr />
-<div class="container-pricing">
+<div class="d-flex justify-content-center align-items-center my-5">
+    <div class="d-flex justify-content-center align-items-center">
+        <div>
+            <div class="d-flex">
+                <div>
+                    <div style="height: 39.5vh; width: 30vh; border: 1px solid #dee2e6">
+                    </div>
+                    <div>
+                        <div class="package-item" style="width:30vh; height:6.8rem">
+                            Delivery Days
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="package-items">
+                        <div class="package">
+                            Basic
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Title</p>
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Details</p>
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Delivery Days</p>
+                        </div>
+                    </div>
 
+                    <div class="package-items">
+                        <div class="package">
+                            Standard
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Title</p>
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Details</p>
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Delivery Days</p>
+                        </div>
+                    </div>
+
+                    <div class="package-items">
+                        <div class="package">
+                            Premium
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Title</p>
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Details</p>
+                        </div>
+                        <div class="package-item">
+                            <p>Enter Delivery Days</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="bg-secondary text-white p-1 align-items-center position-relative">
+                <div class="d-flex m-1">
+                    <div class="flex-grow-1">
+                        <p>
+                            Materials
+                        </p>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg" @onclick="() => this.AddMaterial()"  viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div>
+               @foreach (var material in this.materials)
+               {
+                <div class="d-flex">
+                    <div class="material-item justify-content-center align-items-center" style="width:14.5rem;">
+                        @material.Value.Name
+                    </div>
+                    @if (!packages[1].Materials.Any(m => m == material.Value))
+                    {
+                        <div class="material-item justify-content-center align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(1,material.Key)">
+                                <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="material-item justify-content-center align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg"  class="svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    }
+
+                    @if (!packages[2].Materials.Any(m => m == material.Value))
+                    {
+                        <div class="material-item justify-content-center align-items-center" >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(2, material.Key)">
+                                <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="material-item justify-content-center align-items-center" >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    }
+
+                    @if (!packages[3].Materials.Any(m => m == material.Value))
+                    {
+                        <div class="material-item justify-content-center align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor"  @onclick="() => this.CheckMaterialToPackage(3, material.Key)">
+                                <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="material-item justify-content-center align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" >
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    }
+                </div>
+               }
+            </div>
+        </div>
+    </div>
+    <div class="middle">
+
+    </div>
 </div>
-
-@code {
-
-}

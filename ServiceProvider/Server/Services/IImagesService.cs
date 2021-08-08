@@ -9,5 +9,7 @@ namespace ServiceProvider.Server.Services
     public interface IImagesService
     {
         Task CreateAsync(CreateImagesInputModel inputModel);
+
+        IEnumerable<T> GetAllBy<T>(int serviceId);
     }
 }
