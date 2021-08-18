@@ -1,4 +1,4 @@
-﻿using ServiceProvider.Shared.Packages;
+﻿using ServiceProvider.Shared.PackageModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

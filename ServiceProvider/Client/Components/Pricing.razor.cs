@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Components;
-using ServiceProvider.Client.Services;
-using ServiceProvider.Shared.Materials;
-using ServiceProvider.Shared.Packages;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Client.Components
+﻿namespace ServiceProvider.Client.Components
 {
+    using Microsoft.AspNetCore.Components;
+    using Microsoft.AspNetCore.Components.Forms;
+    using ServiceProvider.Client.Services;
+    using ServiceProvider.Shared.Materials;
+    using ServiceProvider.Shared.PackageModels;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public partial class Pricing : ComponentBase
     {
+
+        private EditContext EditContextBasicPackage;
+        private EditContext EditContextStandardPackage;
+        private EditContext EditContextPremiumPackage;
 
         [Parameter]
         public int ServiceId { get; set; }
@@ -17,67 +22,112 @@ namespace ServiceProvider.Client.Components
         [Inject]
         public IPackagesService PackagesService { get; set; }
 
-        private int packagesWanted = 3;
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        private string Disabled { get; set; } = "disabled";
 
         private int count;
 
-        private Dictionary<int, CreatePackageInputModel> packages = new Dictionary<int, CreatePackageInputModel>();
-        private Dictionary<int, CreateMaterialInputModel> materials = new Dictionary<int, CreateMaterialInputModel>();
+        private Dictionary<int, CreateMaterialInputModel> materials = new ();
        
-        private CreatePackageInputModel BasicPackageInputModel = new CreatePackageInputModel();
+        private CreatePackageInputModel BasicPackageInputModel = new();
 
-        private CreatePackageInputModel StandardPackageInputModel = new CreatePackageInputModel();
+        private CreatePackageInputModel StandardPackageInputModel = new();
 
-        private CreatePackageInputModel PremiumPackageInputModel = new CreatePackageInputModel();
+        private CreatePackageInputModel PremiumPackageInputModel = new();
 
         protected override void OnInitialized()
-        {
-            for (int i = 1; i <= 3; i++)
-            {
-                CreatePackageInputModel inputModel = new CreatePackageInputModel();
-                this.packages[i] = inputModel;
-                inputModel.Materials = new List<CreateMaterialInputModel>();
-            }
 
-            //this.BasicPackageInputModel.Number = 1;
-            //this.StandardPackageInputModel.Number = 2;
-            //this.PremiumPackageInputModel.Number = 3;
+        {
+            this.BasicPackageInputModel.PackageType = "Basic";
+            this.BasicPackageInputModel.ServiceId = this.ServiceId;
+            this.BasicPackageInputModel.Materials = new List<CreateMaterialInputModel>();
+
+            this.StandardPackageInputModel.PackageType = "Standard";
+            this.StandardPackageInputModel.ServiceId = this.ServiceId;
+            this.StandardPackageInputModel.Materials = new List<CreateMaterialInputModel>();
+
+            this.PremiumPackageInputModel.PackageType = "Premium";
+            this.PremiumPackageInputModel.ServiceId = this.ServiceId;
+            this.PremiumPackageInputModel.Materials = new List<CreateMaterialInputModel>();
+
+            this.EditContextBasicPackage = new EditContext(this.BasicPackageInputModel);
+            this.EditContextStandardPackage = new EditContext(this.StandardPackageInputModel);
+            this.EditContextPremiumPackage = new EditContext(this.PremiumPackageInputModel);
+
+            this.EditContextBasicPackage.OnFieldChanged += this.EditContext_OnFieldChanged;
+            this.EditContextPremiumPackage.OnFieldChanged += this.EditContext_OnFieldChanged;
+            this.EditContextStandardPackage.OnFieldChanged += this.EditContext_OnFieldChanged;
+
+            base.OnInitialized();
         }
 
         public void AddMaterial()
         {
-            CreateMaterialInputModel inputModel = new CreateMaterialInputModel();
+            CreateMaterialInputModel inputModel = new();
             this.count++;
 
-            inputModel.Name = $"{this.count}";
             this.materials[count] = inputModel;
             this.StateHasChanged();
         }
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            this.SetSaveDisabledStatus();
+        }
+
         private void CheckMaterialToPackage(int packageNumber, int materialNumber)
         {
-            foreach (var package in this.packages)
+            switch (packageNumber)
             {
-                if (package.Value.Materials.Any(m => m == this.materials[materialNumber]))
-                {
-                    this.packages[package.Key].Materials.Remove(this.materials[materialNumber]);
+                case 1:
+                    this.BasicPackageInputModel.Materials.Add(this.materials[materialNumber]);
                     break;
-                }
+
+                case 2:
+                    this.StandardPackageInputModel.Materials.Add(this.materials[materialNumber]);
+                    break;
+                case 3:
+                    this.PremiumPackageInputModel.Materials.Add(this.materials[materialNumber]);
+                    break;
+                default:
+                    System.Console.WriteLine("No package with that number found");
+                    break;
             }
 
-
-            this.packages[packageNumber].Materials.Add(this.materials[materialNumber]);
             this.StateHasChanged();
         }
 
         public async Task Save()
         {
-            foreach (var package in packages)
-            {
-                await this.PackagesService.CreateAsync(package.Value);
-                await Task.Delay(5000);
-            }
+            await Task.Delay(3000);
+
+            await this.PackagesService.CreateAsync(this.BasicPackageInputModel);
+            await this.PackagesService.CreateAsync(this.StandardPackageInputModel);
+            await this.PackagesService.CreateAsync(this.PremiumPackageInputModel);
+
+            string uri = $"gallery/{this.ServiceId}";
+            this.NavigationManager.NavigateTo(uri);
         }
 
+
+        private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
+        {
+            this.SetSaveDisabledStatus();
+        }
+
+        private void SetSaveDisabledStatus()
+        {
+            if (this.EditContextStandardPackage.Validate() && this.EditContextBasicPackage.Validate() && this.EditContextPremiumPackage.Validate())
+            {
+                this.Disabled = null;
+            }
+            else
+            {
+                this.Disabled = "disabled";
+            }
+        }
     }
 }

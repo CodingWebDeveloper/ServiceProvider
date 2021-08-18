@@ -1,7 +1,7 @@
 ﻿using ServiceProvider.Server.Data;
 using ServiceProvider.Server.Models;
 using ServiceProvider.Server.Models.Enums;
-using ServiceProvider.Shared.Packages;
+using ServiceProvider.Shared.PackageModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +39,15 @@ namespace ServiceProvider.Server.Services
                         Name = material.Name
                     },
                 };
-
-                package.Materials.Add(newMaterial);
+                if (this.dbContext.PackageMaterials.Any(pm => pm.Material.Name == material.Name))
+                {
+                    PackageMaterial existingMaterial = this.dbContext.PackageMaterials.FirstOrDefault(pm => pm.Material.Name == material.Name);
+                    package.Materials.Add(existingMaterial);
+                }
+                else
+                {
+                    package.Materials.Add(newMaterial);
+                }
             }
 
             await this.dbContext.Packages.AddAsync(package);
