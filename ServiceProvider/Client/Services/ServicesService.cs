@@ -1,9 +1,14 @@
-﻿using ServiceProvider.Shared.Services;
+﻿using MatBlazor;
+using ServiceProvider.Shared.Images;
+using ServiceProvider.Shared.PackageModels;
+using ServiceProvider.Shared.Reviews;
+using ServiceProvider.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ServiceProvider.Client.Services
@@ -34,6 +39,16 @@ namespace ServiceProvider.Client.Services
         public async Task<IEnumerable<T>> GetAllByUserId<T>()
         {
             return await this.httpClient.GetFromJsonAsync<IEnumerable<T>>("api/services");
+        }
+
+        public async Task<T> GetById<T>(int serviceId)
+        {
+            return await this.httpClient.GetFromJsonAsync<T>($"api/services/service-info/{serviceId}");
+        }
+
+        public async Task<double> GetStartingPrice(int serviceId)
+        {
+            return await this.httpClient.GetFromJsonAsync<double>($"api/services/price/{serviceId}");
         }
     }
 }

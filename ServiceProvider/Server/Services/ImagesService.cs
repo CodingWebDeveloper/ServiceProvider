@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using ServiceProvider.Server.Data;
+    using ServiceProvider.Server.Models;
     using ServiceProvider.Shared.Images;
     using System;
     using System.Collections.Generic;
@@ -19,14 +20,21 @@
             this.mapper = mapper;
         }
 
-        public Task CreateAsync(CreateImagesInputModel inputModel)
+        public async Task CreateAsync(CreateImageInputModel inputModel)
         {
-            throw new NotImplementedException();
+            Image image = new Image()
+            {
+                RemoteUrl = inputModel.RemoteUrl,
+                ServiceId = inputModel.ServiceId,
+            };
+
+            await this.dbContext.Images.AddAsync(image);
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllBy<T>(int serviceId)
-        {
-            return this.mapper.ProjectTo<T>(this.dbContext.Images.Where(img => img.ServiceId == serviceId));
-        }
+        //public IEnumerable<T> GetAllBy<T>(int serviceId)
+        //{
+        //    return this.mapper.ProjectTo<T>(this.dbContext.Images.Where(img => img.ServiceId == serviceId));
+        //}
     }
 }

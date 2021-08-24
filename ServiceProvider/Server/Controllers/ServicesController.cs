@@ -34,7 +34,21 @@ namespace ServiceProvider.Server.Controllers
         public IActionResult GetAllBy()
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return this.Ok(this.servicesService.GetAllBy<ServiceViewModel>(userId));
+            IEnumerable<ServiceViewModel> services = this.servicesService.GetAllBy<ServiceViewModel>(userId);
+
+            return this.Ok(services);
+        }
+
+        [HttpGet("price/{serviceId}")]
+        public IActionResult GetStartingPrice([FromRoute]int serviceId)
+        {
+            return this.Ok(this.servicesService.GetStartingPrice(serviceId));
+        }
+
+        [HttpGet("service-info/{serviceId}")]
+        public IActionResult GetById([FromRoute] int serviceId)
+        {
+            return this.Ok(this.servicesService.GetById<ServiceInfoViewModel>(serviceId));
         }
     }
 }

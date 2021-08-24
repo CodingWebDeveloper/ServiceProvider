@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using ServiceProvider.Server.Models;
-using ServiceProvider.Shared.Requirements;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Server.Profiles
+﻿namespace ServiceProvider.Server.Profiles
 {
+    using AutoMapper;
+    using ServiceProvider.Server.Models;
+    using ServiceProvider.Shared.Requirements;
+
     public class RequirementMappingProfile : Profile
     {
         public RequirementMappingProfile()

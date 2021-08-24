@@ -1,18 +1,15 @@
-﻿using AutoMapper;
-using ServiceProvider.Server.Models;
-using ServiceProvider.Shared.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Server.Profiles
+﻿namespace ServiceProvider.Server.Profiles
 {
+    using AutoMapper;
+    using ServiceProvider.Server.Models;
+    using ServiceProvider.Shared.Services;
+
     public class ServiceMappingProfile : Profile
     {
         public ServiceMappingProfile()
         {
             this.CreateMap<Service, ServiceViewModel>();
+            this.CreateMap<Service, ServiceInfoViewModel>();
         }
     }
 }

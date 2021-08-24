@@ -1,3 +1,4 @@
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,7 +30,8 @@ namespace ServiceProvider.Server
         {
             services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+                
+            options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -43,12 +45,24 @@ namespace ServiceProvider.Server
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
+            Account cloudinaryCredentials = new Account(
+                this.Configuration["Cloudinary:CloudName"],
+                this.Configuration["Cloudinary:ApiKey"],
+                this.Configuration["Cloudinary:ApiSecret"]
+                );
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
+
             services.AddTransient<ISkillsService, SkillsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IServicesService, ServicesService>();
             services.AddTransient<IRequirementsService, RequirementsService>();
             services.AddTransient<IMaterialsService, MaterialsService>();
             services.AddTransient<IPackagesService, PackagesService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IImagesService, ImagesService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

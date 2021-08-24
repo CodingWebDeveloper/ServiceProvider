@@ -39,10 +39,16 @@ namespace ServiceProvider.Server.Services
                         Name = material.Name
                     },
                 };
-                if (this.dbContext.PackageMaterials.Any(pm => pm.Material.Name == material.Name))
+
+                if (this.dbContext.Materials.Any(pm => pm.Name == material.Name))
                 {
-                    PackageMaterial existingMaterial = this.dbContext.PackageMaterials.FirstOrDefault(pm => pm.Material.Name == material.Name);
-                    package.Materials.Add(existingMaterial);
+                    Material existingMaterial = this.dbContext.Materials.FirstOrDefault(pm => pm.Name == material.Name);
+                    PackageMaterial packageMaterial = new PackageMaterial()
+                    {
+                        Material = existingMaterial,
+                    };
+
+                    package.Materials.Add(packageMaterial);
                 }
                 else
                 {

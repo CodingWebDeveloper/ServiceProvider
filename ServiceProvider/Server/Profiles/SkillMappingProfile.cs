@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using ServiceProvider.Server.Models;
-using ServiceProvider.Shared.Skills;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Server.Profiles
+﻿namespace ServiceProvider.Server.Profiles
 {
+    using AutoMapper;
+    using ServiceProvider.Server.Models;
+    using ServiceProvider.Shared.Skills;
+
     public class SkillMappingProfile : Profile
     {
         public SkillMappingProfile()

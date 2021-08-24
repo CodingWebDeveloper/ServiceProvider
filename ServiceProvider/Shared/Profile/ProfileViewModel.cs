@@ -1,12 +1,8 @@
-﻿using ServiceProvider.Shared.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Shared.Profile
+﻿namespace ServiceProvider.Shared.Profile
 {
+    using ServiceProvider.Shared.Services;
+    using System.Collections.Generic;
+
     public class ProfileViewModel
     {
         public IEnumerable<ServiceViewModel> Services { get; set; }

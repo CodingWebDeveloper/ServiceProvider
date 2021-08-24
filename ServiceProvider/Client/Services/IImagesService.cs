@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ServiceProvider.Server.Services
+namespace ServiceProvider.Client.Services
 {
     public interface IImagesService
     {
-        Task CreateAsync(CreateImageInputModel inputModel);
-
-        //IEnumerable<T> GetAllBy<T>(int serviceId);
+        public Task CreateAsync(UploadImagesInputModel inputModel);
     }
 }

@@ -1,7 +1,75 @@
 ﻿@page "/gallery/{ServiceId:int}"
-
+@using System.IO;
+ 
 <h3>Gallery</h3>
 <hr />
-@code {
 
-}
+<style>
+    .card-image:hover {
+        cursor: pointer;
+        transform: scale(1.07);
+        transition: transform 300ms ease-out;
+    }
+</style>
+<div class="row">
+   @foreach (var image in this.Images)
+    {
+       string imageBytes = string.Empty;
+       string src = string.Empty;
+       if (image.Length > 0)
+       {
+           using (var ms = new MemoryStream())
+           {
+               image.CopyTo(ms);
+               var fileBytes = ms.ToArray();
+               imageBytes = Convert.ToBase64String(fileBytes);
+               src = string.Format("data:image/jpg;base64,{0}", imageBytes);
+           }
+       }
+       <div class="col-md-4 m-3 position-relative d-flex justify-content-center align-items-center card-image" style="height: 45vh; width: 35vh; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
+           <img class="h-75 w-75" src="@src" alt="@image.FileName" />
+       </div>
+    }
+   @for (int i = this.Images.Where(c => c.Length > 0).Count(); i < 3; i++)
+    {
+       <div class="col-md-4 m-3 position-relative d-flex justify-content-center align-items-center card-image" style="height: 45vh; width: 35vh; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
+           <label for="input-file" class="bg-secondary rounded d-flex justify-content-center align-items-center w-75 h-75">
+               <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+               </svg>
+           </label>
+           <EditForm EditContext="this.editContext">
+               <InputFile id="input-file" hidden OnChange="this.OnChangeInputFile" type="file" />
+           </EditForm>
+       </div>
+    }
+</div>
+
+
+@*<div class="row my-5">
+    @foreach (var image in this.Images)
+    {
+        string imageBytes = string.Empty;
+        string src = string.Empty;
+        if (image.Length > 0)
+        {
+            using(var ms= new MemoryStream())
+            {
+                image.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                imageBytes = Convert.ToBase64String(fileBytes);
+                src = string.Format("data:image/jpg;base64,{0}", imageBytes);
+            }
+
+        }
+
+        <div class="col-md-3 m-3 position-relative d-flex justify-content-center align-items-center card-image" style="height:500px; width:500px; box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
+            <img class="h-100 w-100" src="@src" alt="@image.FileName" />
+        </div>
+    }
+</div>*@
+
+<div class="d-flex justify-content-end">
+    <button class="btn btn-success text-white"  @onclick="this.Save">Save&Continue</button>
+</div>
+

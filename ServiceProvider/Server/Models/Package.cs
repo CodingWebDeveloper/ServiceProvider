@@ -1,11 +1,8 @@
-﻿using ServiceProvider.Server.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Server.Models
+﻿namespace ServiceProvider.Server.Models
 {
+    using ServiceProvider.Server.Models.Enums;
+    using System.Collections.Generic;
+
     public class Package
     {
         public Package()

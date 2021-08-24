@@ -11,5 +11,9 @@ namespace ServiceProvider.Server.Services
         Task<int> CreateAsync(CreateServiceInputModel inputModel);
 
         IEnumerable<T> GetAllBy<T>(string userId);
+
+        double GetStartingPrice(int serviceId);
+
+        T GetById<T>(int serviceId);
     }
 }

@@ -1,13 +1,9 @@
-﻿using AutoMapper;
-using ServiceProvider.Server.Models;
-using ServiceProvider.Shared.Materials;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Server.Profiles
+﻿namespace ServiceProvider.Server.Profiles
 {
+    using AutoMapper;
+    using ServiceProvider.Server.Models;
+    using ServiceProvider.Shared.Materials;
+
     public class MaterialMappingProfile : Profile
     {
         public MaterialMappingProfile()

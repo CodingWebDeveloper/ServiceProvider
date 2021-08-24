@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using ServiceProvider.Shared.Categories;
-using ServiceProvider.Shared.Requirements;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ServiceProvider.Shared.Services
+﻿namespace ServiceProvider.Shared.Services
 {
+    using ServiceProvider.Shared.Categories;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class CreateServiceInputModel
     {
         [Required]

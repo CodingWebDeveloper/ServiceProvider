@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ServiceProvider.Shared.Images
 {
-    public class CreateImagesInputModel
+    public class CreateImageInputModel
     {
-        public ICollection<IFormFile> Images { get; set; }
+        public string RemoteUrl { get; set; }
+
+        public int ServiceId { get; set; }
     }
 }

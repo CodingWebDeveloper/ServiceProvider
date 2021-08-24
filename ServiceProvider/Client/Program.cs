@@ -31,6 +31,7 @@ namespace ServiceProvider.Client
             builder.Services.AddTransient<IServicesService, ServicesService>();
             builder.Services.AddTransient<IRequirementsService, RequirementsService>();
             builder.Services.AddTransient<IPackagesService, PackagesService>();
+            builder.Services.AddTransient<IImagesService, ImagesService>();
 
             await builder.Build().RunAsync();
         }
