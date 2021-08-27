@@ -6,27 +6,31 @@
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     }
 
-    .item-wr{
-        margin:10px;
+    .item-wr {
+        margin: 10px;
     }
 </style>
 
-<EditForm id="input-form" Model="@this.inputModel" OnValidSubmit="@this.AddNewSkill">
-    <div class="d-flex flex-row">
-        <label class="item-wr">Skill</label>
-        <InputText class="text-black-50 item-wr form-control" placeholder="Enter Name" @bind-Value="@this.inputModel.Name" />
-        <select class="custom-select form-control item-wr" @onchange="OnValueChanged" title="Experience type">
-            <option value="Select" selected disabled="disabled">
-                (Choose experience type)
-            </option>
-            @foreach (var expType in this.experienceTypes)
-            {
-                <option value="@expType">@expType</option>
-            }
-        </select>
-        <button  class="btn btn-secondary item-wr h-['10px']" onclick="hidAddForm()">Cancel</button>
-        <button class="btn btn-success text-white item-wr">Add</button>
+<div id="input-form">
+    <div class="d-flex">
+        <EditForm class="d-flex" EditContext="this.context" OnValidSubmit="this.AddNewSkill">
+            <label class="item-wr">Skill</label>
+            <InputText class="text-black-50 item-wr form-control" placeholder="Enter Name" @bind-Value="this.inputModel.Name" />
+            <select class="custom-select form-control item-wr" @onchange="this.OnValueChanged" title="Experience type">
+                <option value="Select" selected disabled="disabled">
+                    (Choose experience type)
+                </option>
+                @foreach (var expType in this.experienceTypes)
+                {
+                    <option value="@expType">@expType</option>
+                }
+            </select>
+            <button disabled="@this.Disabled" class="btn btn-success text-white item-wr">Add</button>
+        </EditForm>
+        <button class="btn btn-secondary item-wr h-['10px']" onclick="hidAddForm()">Cancel</button>
     </div>
-</EditForm>
+</div>
+
+
 
 <Skills AllSkills="@this.skills" />

@@ -80,7 +80,7 @@ namespace ServiceProvider.Client.Components
             this.inputModel.ByteArrayData = ByteArrayData;
             this.inputModel.ServiceId = this.ServiceId;
             await this.ImagesService.CreateAsync(this.inputModel);
-            this.NavigationManager.NavigateTo("#");
+            this.NavigationManager.NavigateTo($"publish/{this.ServiceId}");
 
         }
     }

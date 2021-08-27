@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using ServiceProvider.Client.Services;
 using ServiceProvider.Shared.Skills;
@@ -18,15 +19,20 @@ namespace ServiceProvider.Client.Components
         public IJSRuntime JS { get; set; }
 
 
-        private readonly AddSkillInputModel inputModel = new();
+        private EditContext context;
+
+        private AddSkillInputModel inputModel = new();
 
         private readonly ICollection<string> experienceTypes = new List<string>() { "Beginner", "Intermediate", "Expert" };
         private IEnumerable<SkillViewModel> skills = new List<SkillViewModel>();
+
+        private string Disabled { get; set; } = "disabled";
 
         private async Task AddNewSkill()
         {
             await this.SkillsService.AddSkill(this.inputModel);
             await this.HidAddForm();
+            this.inputModel = new ();
             await this.Load();
         }
 
@@ -37,10 +43,19 @@ namespace ServiceProvider.Client.Components
 
         protected override async Task OnInitializedAsync()
         {
+            this.context = new EditContext(this.inputModel);
+            this.context.OnFieldChanged += this.EditContext_OnFieldChanged;
             await this.Load();
         }
 
-
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+            if(firstRender)
+            {
+                this.SetSaveDisabledStatus();
+            }
+        }
         async Task Load()
         {
             this.skills = await this.SkillsService.GetAllByUser<SkillViewModel>();
@@ -49,6 +64,23 @@ namespace ServiceProvider.Client.Components
         async Task HidAddForm()
         {
             await this.JS.InvokeVoidAsync("hidAddForm");
+        }
+
+        private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
+        {
+            this.SetSaveDisabledStatus();
+        }
+
+        private void SetSaveDisabledStatus()
+        {
+            if (this.context.Validate())
+            {
+                this.Disabled = null;
+            }
+            else
+            {
+                this.Disabled = "disabled";
+            }
         }
     }
 }

@@ -32,7 +32,7 @@ namespace ServiceProvider.Client.Components
 
         }
 
-        public async Task LoadServices()
+        private async Task LoadServices()
         {
             this.services = await this.ServicesService.GetAllByUserId<ServiceViewModel>();
             foreach (var service in this.services)
@@ -43,7 +43,7 @@ namespace ServiceProvider.Client.Components
             this.StateHasChanged();
         }
 
-        public void ViewServiceInfo(int serviceId)
+        private void ViewServiceInfo(int serviceId)
         {
             this.NavigationManager.NavigateTo($"service-info/{serviceId}");
         }

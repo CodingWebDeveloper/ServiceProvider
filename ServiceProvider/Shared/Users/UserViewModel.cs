@@ -1,4 +1,5 @@
-﻿using ServiceProvider.Shared.Skills;
+﻿using AutoMapper;
+using ServiceProvider.Shared.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,18 @@ namespace ServiceProvider.Shared.Users
 
         public string LastName { get; set; }
 
+        [IgnoreMap]
         public double Rating { get; set; }
 
         public string ProfilePictureUrl { get; set; }
 
+        public int CountOfReviews { get; set; } = 0;
+
+        public string Description { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public IEnumerable<SkillViewModel> Skills { get; set; }
+
     }
 }

@@ -48,13 +48,12 @@
         font-weight: bold;
         font-size: 18px;
         transition: 0.6s ease;
-        border-radius: 50%;
+        border-radius: 3px 0 0 3px;
         user-select: none;
     }
 
     .next {
         right: 0;
-        border-radius: 3px 0 0 3px;
     }
 
         .prev:hover, .next:hover {
@@ -90,11 +89,11 @@
     <div class="card col-md-4 rounded row-margin-20" style="min-width:initial; min-height:initial">
         @if (service.Images.Any())
         {
-            <div class="slideshow-container">
+            <div class="slideshow-container position-relative my-2">
                 @foreach (var image in service.Images)
                 {
                     <div class="slides">
-                        <img class="img-thumbnail" src="@image.RemoteUrl" alt="SlideImage" />
+                        <img width="300" height="280"  src="@image.RemoteUrl" alt="SlideImage" />
                     </div>
                 }
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

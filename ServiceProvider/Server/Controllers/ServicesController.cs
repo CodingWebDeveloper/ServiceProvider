@@ -50,5 +50,18 @@ namespace ServiceProvider.Server.Controllers
         {
             return this.Ok(this.servicesService.GetById<ServiceInfoViewModel>(serviceId));
         }
+
+        [HttpGet("service-unfinished-orders/{serviceId}")]
+        public IActionResult GetUnfinishedOrdersBy([FromRoute] int serviceId)
+        {
+            return this.Ok(this.servicesService.GetUnfinishedOrdersBy(serviceId));
+        }
+
+        [HttpPost("publish-service")]
+        public async Task<IActionResult> PublishServiceBy([FromBody]int serviceId)
+        {
+            await this.servicesService.PublishServiceBy(serviceId);
+            return this.Ok();
+        }
     }
 }

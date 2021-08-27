@@ -2,6 +2,7 @@
 using Microsoft.JSInterop;
 using ServiceProvider.Client.Services;
 using ServiceProvider.Shared.Services;
+using ServiceProvider.Shared.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,23 +19,35 @@ namespace ServiceProvider.Client.Components
         public IServicesService ServicesService { get; set; }
 
         [Inject]
+        public IApplicationUsersService ApplicationUsersService { get; set; }
+
+        [Inject]
         public IJSRuntime JS { get; set; }
 
         private ServiceInfoViewModel service= new();
 
         protected override async Task OnInitializedAsync()
         {
-            try
-            {
-                this.service = await this.ServicesService.GetById<ServiceInfoViewModel>(this.ServiceId);
-                this.StateHasChanged();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Something went wrong");
-            }
+            this.service = await this.ServicesService.GetById<ServiceInfoViewModel>(this.ServiceId);
+            this.service.Creator = await this.ApplicationUsersService.GetById<UserViewModel>();
+            this.service.CurrentPendingOrdersCount = await this.ServicesService.GetUnfinishedOrdersBy(this.ServiceId);
+            this.StateHasChanged();
             await base.OnInitializedAsync();
-            await this.JS.InvokeVoidAsync("showSlides", 1);
+            if(this.service.Images.Any())
+            {
+                await this.JS.InvokeVoidAsync("showSlides", 1);
+            }
+           
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if(firstRender)
+            {
+                await this.JS.InvokeVoidAsync("openPackage", "Basic");
+            }
+
+            await base.OnAfterRenderAsync(firstRender);
         }
     }
 }

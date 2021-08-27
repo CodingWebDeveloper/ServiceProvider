@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ServiceProvider.Server.Services
 {
-    public class ApplicationUsersService : IApplicationUser
+    public class ApplicationUsersService : IApplicationUsersService
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
@@ -18,7 +18,7 @@ namespace ServiceProvider.Server.Services
             this.mapper = mapper;
         }
 
-        public T GetBy<T>(string userId)
+        public T GetById<T>(string userId)
         {
             return this.mapper.Map<T>(this.dbContext.Users.FirstOrDefault(x => x.Id == userId));
         }

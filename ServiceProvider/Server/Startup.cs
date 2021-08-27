@@ -63,6 +63,7 @@ namespace ServiceProvider.Server
             services.AddTransient<IPackagesService, PackagesService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IImagesService, ImagesService>();
+            services.AddTransient<IApplicationUsersService, ApplicationUsersService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

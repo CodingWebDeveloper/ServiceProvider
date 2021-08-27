@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace ServiceProvider.Server.Services
 {
-    public interface IApplicationUser
+    public interface IApplicationUsersService
     {
-        T GetBy<T>(string userId);
+        T GetById<T>(string userId);
     }
 }

@@ -31,9 +31,10 @@
             transition: opacity 350ms ease-in;
         }
 </style>
+<Roadmap CurrentStep="Requirements" />
+
 <h3>Requirements</h3>
 <hr />
-
 @if (this.IsUpdating)
 {
     <EditForm class="input-form" Model="@this.editModel" OnValidSubmit="() => this.Update()">
@@ -46,7 +47,7 @@
                 <InputTextArea class="input" @bind-Value="@this.editModel.Content" />
             </div>
             <div class="card-footer d-flex justify-content-end">
-                <button class="btn btn-secondary mx-3" @onclick:stopPropagation @onclick="() => this.CancelEditing()" >Cancel</button>
+                <button class="btn btn-secondary mx-3" @onclick:stopPropagation @onclick="() => this.CancelEditing()">Cancel</button>
                 <button class="btn btn-success text-white">Update</button>
             </div>
         </div>

@@ -50,5 +50,15 @@ namespace ServiceProvider.Client.Services
         {
             return await this.httpClient.GetFromJsonAsync<double>($"api/services/price/{serviceId}");
         }
+
+        public async Task<int> GetUnfinishedOrdersBy(int serviceId)
+        {
+            return await this.httpClient.GetFromJsonAsync<int>($"api/services/service-unfinished-orders/{serviceId}");
+        }
+
+        public async Task PublishServiceBy(int serviceId)
+        {
+            await this.httpClient.PostAsJsonAsync($"api/services/publish-service", serviceId);
+        }
     }
 }

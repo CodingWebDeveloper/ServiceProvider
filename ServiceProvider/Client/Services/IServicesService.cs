@@ -14,6 +14,10 @@ namespace ServiceProvider.Client.Services
 
         Task<double> GetStartingPrice(int serviceId);
 
+        Task<int> GetUnfinishedOrdersBy(int serviceId);
+
+        Task PublishServiceBy(int serviceId);
+
         Task<T> GetById<T>(int serviceId);
     }
 }

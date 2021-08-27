@@ -1,21 +1,21 @@
 ﻿@page "/pricing/{ServiceId:int}"
 
 <style>
-    .container-pricing{
-        display:grid;
+    .container-pricing {
+        display: grid;
     }
 
-    .package{
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        border:1px solid #dee2e6;
+    .package {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #dee2e6;
         width: inherit;
-        height:inherit;
-        position:relative;
-        font-weight:bold;
-        color:darkgray;
-        font-size:18px;
+        height: inherit;
+        position: relative;
+        font-weight: bold;
+        color: darkgray;
+        font-size: 18px;
     }
 
     .package-item {
@@ -34,26 +34,29 @@
         width: 10rem;
     }
 
-    .svg{
+    .svg {
         height: 25px;
         width: 25px;
     }
 
     .material-item {
-        display:flex;
+        display: flex;
         border: 1px solid #dee2e6;
         height: 5rem;
         width: 10rem;
         align-items: start;
-        justify-content:flex-start;
+        justify-content: flex-start;
     }
 
-    .svg:hover{
-        cursor:pointer;
-        transform:scale(1.05);
+    .svg:hover {
+        cursor: pointer;
+        transform: scale(1.05);
         transition: transform 250ms ease-in;
     }
 </style>
+
+<Roadmap CurrentStep="Pricing"/>
+
 <h3>Pricing</h3>
 <hr />
 <div class="d-flex justify-content-center align-items-center my-5">
@@ -74,86 +77,85 @@
                         </div>
                     </div>
                 </div>
-                    <div class="d-flex">
-                        <EditForm EditContext="this.EditContextBasicPackage">
-                            <DataAnnotationsValidator />
-                            <ValidationSummary />
-                            <div class="package-items">
-                                <div class="package">
-                                    Basic
-                                </div>
-                                <div class="package-item">
-                                    <InputTextArea @bind-Value="this.BasicPackageInputModel.Title" />
-                                </div>
-                                <div class="package-item">
-                                    <InputTextArea @bind-Value="this.BasicPackageInputModel.Details" />
-                                </div>
-                                <div class="package-item">
-                                    <InputSelect @bind-Value="this.BasicPackageInputModel.DeliveryDays">
-                                        @for (int i = 1; i <= 10; i++)
-                                        {
-                                            <option>@i</option>
-                                        }
-                                    </InputSelect>
-                                </div>
-                                <div class="package-item">
-                                    <InputNumber @bind-Value="this.BasicPackageInputModel.Price" />
-                                </div>
+                <div class="d-flex">
+                    <EditForm EditContext="this.EditContextBasicPackage">
+                        
+                        <div class="package-items">
+                            <div class="package">
+                                Basic
                             </div>
-                        </EditForm>
-                        <EditForm EditContext="this.EditContextStandardPackage">
-                            <DataAnnotationsValidator />
-                            <ValidationSummary />
-                            <div class="package-items">
-                                <div class="package">
-                                    Standard
-                                </div>
-                                <div class="package-item">
-                                    <InputTextArea @bind-Value="this.StandardPackageInputModel.Title" />
-                                </div>
-                                <div class="package-item">
-                                    <InputTextArea @bind-Value="this.StandardPackageInputModel.Details" />
-                                </div>
-                                <div class="package-item">
-                                    <InputSelect @bind-Value="this.StandardPackageInputModel.DeliveryDays">
-                                        @for (int i = 1; i <= 10; i++)
-                                        {
-                                            <option>@i</option>
-                                        }
-                                    </InputSelect>
-                                </div>
-                                <div class="package-item">
-                                    <InputNumber @bind-Value="this.StandardPackageInputModel.Price" />
-                                </div>
+                            <div class="package-item">
+                               
+                                <InputTextArea class="form-control" @bind-Value="this.BasicPackageInputModel.Title" />
                             </div>
-                        </EditForm>
-                        <EditForm EditContext="this.EditContextPremiumPackage">
-                            <DataAnnotationsValidator />
-                            <ValidationSummary />
-                            <div class="package-items">
-                                <div class="package">
-                                    Premium
-                                </div>
-                                <div class="package-item">
-                                    <InputTextArea @bind-Value="this.PremiumPackageInputModel.Title" />
-                                </div>
-                                <div class="package-item">
-                                    <InputTextArea @bind-Value="this.PremiumPackageInputModel.Details" />
-                                </div>
-                                <div class="package-item">
-                                    <InputSelect @bind-Value="this.PremiumPackageInputModel.DeliveryDays">
-                                        @for (int i = 1; i <= 10; i++)
-                                        {
-                                            <option>@i</option>
-                                        }
-                                    </InputSelect>
-                                </div>
-                                <div class="package-item">
-                                    <InputNumber @bind-Value="this.PremiumPackageInputModel.Price" />
-                                </div>
+                            <div class="package-item">
+                                <InputTextArea class="form-control" @bind-Value="this.BasicPackageInputModel.Details" />
                             </div>
-                        </EditForm>
-                    </div>
+                            <div class="package-item">
+                                <InputSelect class="form-control" @bind-Value="this.BasicPackageInputModel.DeliveryDays">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                        <option>@i</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="package-item">
+                                <InputNumber class="form-control" @bind-Value="this.BasicPackageInputModel.Price" />
+                            </div>
+                        </div>
+                    </EditForm>
+                    <EditForm EditContext="this.EditContextStandardPackage">
+                       
+                        <div class="package-items">
+                            <div class="package">
+                                Standard
+                            </div>
+                            <div class="package-item">
+                               
+                                <InputTextArea class="form-control" @bind-Value="this.StandardPackageInputModel.Title" />
+                            </div>
+                            <div class="package-item">
+                                <InputTextArea class="form-control" @bind-Value="this.StandardPackageInputModel.Details" />
+                            </div>
+                            <div class="package-item">
+                                <InputSelect class="form-control" @bind-Value="this.StandardPackageInputModel.DeliveryDays">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                        <option>@i</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="package-item">
+                                <InputNumber class="form-control" @bind-Value="this.StandardPackageInputModel.Price" />
+                            </div>
+                        </div>
+                    </EditForm>
+                    <EditForm EditContext="this.EditContextPremiumPackage">
+                        <div class="package-items">
+                            <div class="package">
+                                Premium
+                            </div>
+                            <div class="package-item">
+                                
+                                <InputTextArea class="form-control" @bind-Value="this.PremiumPackageInputModel.Title" />
+                            </div>
+                            <div class="package-item">
+                                <InputTextArea class="form-control" @bind-Value="this.PremiumPackageInputModel.Details" />
+                            </div>
+                            <div class="package-item">
+                                <InputSelect class="form-control" @bind-Value="this.PremiumPackageInputModel.DeliveryDays">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                        <option>@i</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="package-item">
+                                <InputNumber class="form-control" @bind-Value="this.PremiumPackageInputModel.Price" />
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
             </div>
             <div class="bg-secondary text-white p-1 align-items-center position-relative">
                 <div class="d-flex m-1">
@@ -163,79 +165,79 @@
                         </p>
                     </div>
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="svg" @onclick="() => this.AddMaterial()"  viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg" @onclick="() => this.AddMaterial()" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                         </svg>
                     </div>
                 </div>
             </div>
             <div>
-               @foreach (var material in this.materials)
-               {
-                <div class="d-flex">
-                    <div class="material-item justify-content-center align-items-center" style="width:14.5rem;">
-                        @material.Value.Name
-                        <EditForm Model="@material.Value">
-                            <InputText @bind-Value="@material.Value.Name" />
-                        </EditForm>
+                @foreach (var material in this.materials)
+                {
+                    <div class="d-flex">
+                        <div class="material-item justify-content-center align-items-center" style="width:14.5rem;">
+                            @material.Value.Name
+                            <EditForm Model="@material.Value">
+                                <InputText @bind-Value="@material.Value.Name" />
+                            </EditForm>
+                        </div>
+                        @if (!this.BasicPackageInputModel.Materials.Any(m => m == material.Value))
+                        {
+                            <div class="material-item justify-content-center align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(1,material.Key)">
+                                    <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="material-item justify-content-center align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        }
+
+                        @if (!this.StandardPackageInputModel.Materials.Any(m => m == material.Value))
+                        {
+                            <div class="material-item justify-content-center align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(2, material.Key)">
+                                    <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="material-item justify-content-center align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        }
+
+                        @if (!this.PremiumPackageInputModel.Materials.Any(m => m == material.Value))
+                        {
+                            <div class="material-item justify-content-center align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(3, material.Key)">
+                                    <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="material-item justify-content-center align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        }
                     </div>
-                    @if (!this.BasicPackageInputModel.Materials.Any(m => m == material.Value))
-                    {
-                        <div class="material-item justify-content-center align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(1,material.Key)">
-                                <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="material-item justify-content-center align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"  class="svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    }
-
-                    @if (!this.StandardPackageInputModel.Materials.Any(m => m == material.Value))
-                    {
-                        <div class="material-item justify-content-center align-items-center" >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(2, material.Key)">
-                                <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="material-item justify-content-center align-items-center" >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    }
-
-                    @if (!this.PremiumPackageInputModel.Materials.Any(m => m == material.Value))
-                    {
-                        <div class="material-item justify-content-center align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor"  @onclick="() => this.CheckMaterialToPackage(3, material.Key)">
-                                <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-
-                    }
-                    else
-                    {
-                        <div class="material-item justify-content-center align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" >
-                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    }
-                </div>
-               }
+                }
             </div>
         </div>
     </div>
-    <div class="middle">
-        <button disabled="@this.Disabled" class="btn btn-success text-white" @onclick="this.Save">Save&Continue</button>
-    </div>
+</div>
+<div class="d-flex justify-content-end align-items-end">
+    <button disabled="@this.Disabled" class="btn btn-success text-white" @onclick="this.Save">Save&Continue</button>
 </div>

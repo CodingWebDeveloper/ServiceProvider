@@ -12,9 +12,10 @@ namespace ServiceProvider.Shared.Skills
         public string UserId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        [MinLength(12)]
+        public string Name { get; set; } = null;
 
         [Required]
-        public string ExperienceType { get; set; }
+        public string ExperienceType { get; set; } = null;
     }
 }

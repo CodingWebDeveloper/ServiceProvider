@@ -1,20 +1,23 @@
-﻿using AutoMapper;
-using ServiceProvider.Server.Data;
-using ServiceProvider.Server.Models;
-using ServiceProvider.Shared.Services;
+﻿
 namespace ServiceProvider.Server.Services
 {
+    using ServiceProvider.Server.Data;
+    using ServiceProvider.Server.Models;
+    using ServiceProvider.Shared.Services;
     using ServiceProvider.Server.Models.Enums;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
 
     public class ServicesService : IServicesService
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
 
-        public ServicesService(ApplicationDbContext dbContext, IMapper mapper)
+        public ServicesService(
+            ApplicationDbContext dbContext,
+            IMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -63,6 +66,22 @@ namespace ServiceProvider.Server.Services
             }
 
             return price;
+        }
+
+        public int GetUnfinishedOrdersBy(int serviceId)
+        {
+            return this.dbContext.Orders
+                .Where(o => o.FinishedDate != null && o.Package.ServiceId == serviceId)
+                .Count();
+        }
+
+        public async Task PublishServiceBy(int serviceId)
+        {
+            Service service = await this.dbContext.Services.FindAsync(serviceId);
+
+            service.IsPublished = true;
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }
