@@ -1,6 +1,6 @@
 ﻿namespace ServiceProvider.Shared.Requirements
 {
-    public class EditRequirementInputModel
+    public class UpdateRequirementInputModel
     {
         public int Id { get; set; }
 

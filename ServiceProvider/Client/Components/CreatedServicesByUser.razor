@@ -1,0 +1,40 @@
+﻿@page "/services/created-by-user"
+
+<MudText Typo="Typo.h4">Created Services</MudText>
+<MudDivider Class="mb-16" />
+@if(this.services != null)
+{
+    <MudGrid Spacing="2" Justify="Justify.Center">
+        @foreach(var service in this.services)
+        {
+            <MudCard>
+                    <MudCarousel Class="mud-width-full" Style="height:200px;" ShowArrows="true" ShowBullets="false" AutoCycle="false" TData="object">
+                        @if (service.Images != null)
+                        {
+                            foreach (var image in service.Images)
+                            {
+                                <MudCarouselItem Transition="transition" Color="@Color.Primary">
+                                    <div class="d-flex" style="height:100%">
+                                        <MudCardMedia Class="mx-auto my-auto" Height="200" Image="@image.RemoteUrl" />
+                                    </div>
+                                </MudCarouselItem>
+                            } 
+                        }
+                    </MudCarousel>
+                    <MudCardContent>
+                        <MudText Typo="Typo.h4">@service.Title</MudText>
+                        <MudItem>
+                            <MudSpacer/>
+                            <MudRating SelectedValue="@service.Rating" />
+                            <MudItem>
+                                <MudText Typo="Typo.h6" Class="justify-content-center" Color="Color.Success">
+                                    STARTING AT<br/>
+                                    @service.StartingPrice
+                                </MudText>
+                            </MudItem>
+                        </MudItem>
+                    </MudCardContent>
+            </MudCard>
+        } 
+    </MudGrid>
+}

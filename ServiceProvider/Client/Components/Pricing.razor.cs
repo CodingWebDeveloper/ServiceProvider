@@ -19,6 +19,9 @@
         [Parameter]
         public int ServiceId { get; set; }
 
+        [Parameter]
+        public EventCallback IncreaseProccessStep { get; set; }
+
         [Inject]
         public IPackagesService PackagesService { get; set; }
 

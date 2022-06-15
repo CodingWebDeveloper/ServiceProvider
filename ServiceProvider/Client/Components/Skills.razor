@@ -1,27 +1,32 @@
-﻿<style>
-    .btn:hover{
-        cursor:pointer;
-    }
-</style>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">Skill</th>
-            <th class="d-flex align-items-center" scope="col">
-                <div class="flex-grow-1">
-                    Level
-                </div>
-                <div @onclick="ShowAddForm" class="btn d-inline-flex text-success bg-transparent text-decoration-none border border-white pointer-event">Add Skill</div>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var skill in this.AllSkills)
-	    {
-            <tr>
-                <td>@skill.Name</td>
-                <td>@skill.ExperienceType</td>
-            </tr>
-	    }
-    </tbody>
-</table>
+﻿@page "/skills/all-by-user"
+
+@if (this.openCreateForm)
+{
+    <CreateSkill LoadSkills = "LoadSkills" />
+}
+
+<MudItem Class="d-flex my-3">
+    <MudSpacer/>
+    <MudButton Variant="Variant.Filled" OnClick="OpenCreateForm">Create skill</MudButton>
+</MudItem>
+
+<MudTable Items="@this.skills" Dense="false" Hover="true" Bordered="false" Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Skills</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="this.searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Nr</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Level</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@(nr++)</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Level">@context.ExperienceType</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

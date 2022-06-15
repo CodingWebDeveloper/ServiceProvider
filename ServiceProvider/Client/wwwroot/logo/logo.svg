@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.72515432"
+     inkscape:cx="397.15684"
+     inkscape:cy="561.94935"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="230.29581"
+       y="250.98106"
+       width="351.64928"
+       height="365.43946"
+       id="rect440" />
+    <rect
+       x="89.636093"
+       y="262.01319"
+       width="198.57842"
+       height="177.89317"
+       id="rect63" />
+  </defs>
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:#1a1a1a;stroke-width:0.254288"
+       id="path565"
+       cx="75.563286"
+       cy="90.231537"
+       rx="43.783783"
+       ry="29.37162" />
+    <text
+       xml:space="preserve"
+       style="font-size:57.6848px;fill:#ffffff;stroke-width:0.300442"
+       x="56.329983"
+       y="112.2326"
+       id="text446"
+       transform="scale(1.0151832,0.9850439)"><tspan
+         sodipodi:role="line"
+         id="tspan444"
+         style="stroke-width:0.300442;fill:#ffffff"
+         x="56.329983"
+         y="112.2326">V</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-18.352025,-3.2475226)"
+       id="text438"
+       style="font-size:192px;white-space:pre;shape-inside:url(#rect440);fill:#ff6600"><tspan
+         x="230.29492"
+         y="426.14789"
+         id="tspan631">S</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:50.8px;fill:#ff6600;stroke-width:0.264583"
+       x="78.354172"
+       y="109.29515"
+       id="text450"><tspan
+         sodipodi:role="line"
+         id="tspan448"
+         style="stroke-width:0.264583"
+         x="78.354172"
+         y="109.29515">P</tspan></text>
+  </g>
+</svg>

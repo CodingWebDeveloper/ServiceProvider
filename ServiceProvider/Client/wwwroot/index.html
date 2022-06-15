@@ -10,6 +10,8 @@
     <link href="css/app.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="ServiceProvider.Client.styles.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -23,16 +25,6 @@
     <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>
-        function showAddForm() {
-            const form = document.getElementById('input-form');
-            form.style.display = "flex";
-        }
-
-        function hidAddForm() {
-            const form = document.getElementById('input-form');
-            form.style.display = "none";
-        }
-
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -61,7 +53,7 @@
             }
         }
     </script>
-    <script>
+    <!--<script>
         let slideIndex = 1;
 
         function plusSlides(n) {
@@ -102,7 +94,7 @@
                 packages[i].style.display = "none";
             }
         }
-    </script>
+    </script>-->
     <script>
         function CopyToClipboard(id) {
             var r = document.createRange();
@@ -113,6 +105,7 @@
             window.getSelection().removeAllRanges();
         }
     </script>
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
 </body>
 
 </html>

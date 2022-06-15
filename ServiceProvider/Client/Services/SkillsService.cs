@@ -17,9 +17,9 @@ namespace ServiceProvider.Client.Services
             this.httpClient = httpClient;
         }
 
-        public async Task AddSkill(AddSkillInputModel inputModel)
+        public async Task Create(AddSkillInputModel inputModel)
         {
-            await this.httpClient.PostAsJsonAsync("api/skills", inputModel);
+            await this.httpClient.PostAsJsonAsync("api/skills/create", inputModel);
         }
 
         public async Task<IEnumerable<T>> GetAllByUser<T>()

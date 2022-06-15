@@ -1,4 +1,4 @@
-﻿@page "/createService"
+﻿@page "/services/create"
 
 <style>
     .input-form {
@@ -25,11 +25,11 @@
 
 
 </style>
-<h3>CreateService</h3>
+<h3>Create Service</h3>
 
-<Roadmap CurrentStep="Overview"/>
+@*<Roadmap CurrentStep="Overview"/>*@
 
-<EditForm class="rounded input-form" Model="this.model" OnValidSubmit="@this.Create">
+@*<EditForm class="rounded input-form" Model="this.model" OnValidSubmit="@this.Create">
     <div class="d-flex my-md-5 my-lg-5 my-sm-5 my-xl-5">
         <label class="mx-1">Service Title</label>
         <InputTextArea class="input justify-content-center"  @bind-Value="@this.model.Title" />
@@ -53,4 +53,26 @@
     </div>
    
     <button class="btn btn-success position-absolute" style="left:85%;bottom:5%;margin-top: 10px;" >Save & Continue</button>
-</EditForm>
+</EditForm>*@
+
+<MudItem Class="d-flex flex-column justify-content-center align-items-center">
+    @switch (this.currentProccessStep)
+    {
+        case 1:
+            <OverviewCreateService IncreaseProccessStep="this.IncreaseProccessStep" />
+            break;
+        case 2:
+            <Requirements IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+            break;
+        case 3:
+            <Pricing IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+            break;
+        case 4:
+            <Gallery IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+            break;
+        case 5:
+            <PublishService IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+            break;
+    }
+</MudItem>
+

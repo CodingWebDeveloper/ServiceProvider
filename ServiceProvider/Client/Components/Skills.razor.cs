@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using ServiceProvider.Client.Services;
 using ServiceProvider.Shared.Skills;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,28 @@ namespace ServiceProvider.Client.Components
 {
     public partial class Skills : ComponentBase
     {
-        [Parameter]
-        public IEnumerable<SkillViewModel> AllSkills { get; set; }
+        private IEnumerable<SkillViewModel> skills;
 
         [Inject]
-        public IJSRuntime JS { get; set; }
+        public ISkillsService SkillsService { get; set; }
 
-        async Task ShowAddForm()
+        private string searchString = "";
+
+        private bool openCreateForm;
+
+        private int nr = 1;
+
+        private void OpenCreateForm() => this.openCreateForm = !this.openCreateForm;
+
+        protected override async Task OnInitializedAsync()
         {
-            await this.JS.InvokeVoidAsync("showAddForm");
+            await LoadSkills();
+            await base.OnInitializedAsync();
+        }
+
+        private async Task LoadSkills()
+        {
+            this.skills = await this.SkillsService.GetAllByUser<SkillViewModel>();
         }
     }
 }

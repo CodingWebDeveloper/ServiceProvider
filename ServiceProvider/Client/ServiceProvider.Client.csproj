@@ -6,12 +6,16 @@
 
   <ItemGroup>
     <PackageReference Include="blazor-dom-confetti" Version="0.0.0.5" />
-    <PackageReference Include="MatBlazor" Version="2.8.0" />
+    <PackageReference Include="Gremlin.Net" Version="3.6.0" />
+    <PackageReference Include="LanguageExt.Core" Version="4.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.7" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="MudBlazor" Version="5.2.4" />
+    <PackageReference Include="OneOf" Version="3.0.216" />
+    <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>

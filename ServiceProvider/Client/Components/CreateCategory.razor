@@ -1,0 +1,14 @@
+﻿<EditForm id="input-form" Model="@this.inputModel" OnValidSubmit="@Create">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label class="item-wr">Category</label>
+    <InputText class="text-black-50 item-wr" @bind-Value="@this.inputModel.Name" placholder="Category Name"/>
+    <button type="submit" class="btn btn-success text-white item-wr">Create</button>
+</EditForm>
+
+<MudPaper Class="pa-4">
+    <MudForm @ref="this.form" @bind-IsValid="@this.success">
+        <MudTextField @bind-Value="this.inputModel.Name" T="string" Label="Category name" Required="true" RequiredError="Category name is required!" />
+        <MudButton Variant="Variant.Filled" OnClick="Create" Disabled="@(!this.success)" Class="ml-auto mt-3">Create</MudButton>
+    </MudForm>
+</MudPaper>

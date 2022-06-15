@@ -13,6 +13,9 @@ namespace ServiceProvider.Client.Components
         [Parameter]
         public int ServiceId { get; set; }
 
+        [Parameter]
+        public EventCallback IncreaseProccessStep { get; set; }
+
         //[Inject]
         //public ServicesService ServicesService { get; set; }
 

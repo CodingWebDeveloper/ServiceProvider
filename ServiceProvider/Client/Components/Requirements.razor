@@ -1,0 +1,45 @@
+﻿@page "/requirements/{ServiceId:int}"
+
+<MudText Typo="Typo.h4">Requirements</MudText>
+
+<CreateRequirement LoadRequirements="LoadRequirements" ServiceId="this.ServiceId" />
+
+<MudItem Class="pt-5">
+    @{
+        int index = 1;
+    }
+    @foreach (var requirement in this.requirements)
+    {
+        if (this.IsUpdating && this.requirementToModify == requirement.Id)
+        {
+            <UpdateRequirement CancelUpdate="CancelUpdate" LoadRequirements="LoadRequirements" RequirementId="this.requirementToModify" />
+        }
+        else
+        {
+            <MudCard Class="mt-2">
+                <MudCardHeader>
+                    <MudText Typo="Typo.h5">#@(index++)</MudText>
+                </MudCardHeader>
+                <MudCardContent Class="d-flex">
+                    <MudText Typo="Typo.body2">
+                        @requirement.Content
+                    </MudText>
+                    <MudSpacer/>
+                    <MudItem>
+                         @if (!(this.IsUpdating && this.requirementToModify == requirement.Id))
+                         {
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" aria-label="edit" OnClick="() => OpenModifyForm(requirement.Id)"></MudIconButton>
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" OnClick="() => Delete(requirement.Id)"> </MudIconButton>
+                         }
+                    </MudItem>
+                </MudCardContent>
+            </MudCard>
+        }
+    }
+    <MudItem Class="d-flex justify-content-end mt-2">
+      <MudButton OnClick="async () => await this.IncreaseProccessStep.InvokeAsync()" Color="Color.Success" Variant="Variant.Filled">Continue</MudButton>
+    </MudItem>
+</MudItem>
+
+
+

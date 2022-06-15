@@ -11,7 +11,7 @@ namespace ServiceProvider.Server.Services
         Task CreateAsync(CreateRequirementInputModel inputModel);
 
 
-        Task UpdateAsync(EditRequirementInputModel inputModel);
+        Task UpdateAsync(UpdateRequirementInputModel inputModel);
 
         Task DeleteAsync(int requirementId);
 

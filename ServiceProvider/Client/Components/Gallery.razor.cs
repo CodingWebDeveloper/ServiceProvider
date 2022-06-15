@@ -16,11 +16,11 @@ namespace ServiceProvider.Client.Components
 {
     public partial class Gallery : ComponentBase
     {
-
-        private EditContext editContext;
-
         [Parameter]
         public int ServiceId { get; set; }
+
+        [Parameter]
+        public EventCallback IncreaseProccessStep { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -28,9 +28,19 @@ namespace ServiceProvider.Client.Components
         [Inject]
         public IImagesService ImagesService { get; set; }
 
+        private EditContext editContext;
+        private UploadImagesInputModel inputModel;
+
         private ICollection<IFormFile> Images;
 
-        private UploadImagesInputModel inputModel;
+        protected override void OnInitialized()
+        {
+            this.inputModel = new();
+            this.editContext = new EditContext(this.inputModel);
+            this.Images = new List<IFormFile>();
+
+            base.OnInitialized();
+        }
 
         private async Task OnChangeInputFile(InputFileChangeEventArgs e)
         {
@@ -39,15 +49,7 @@ namespace ServiceProvider.Client.Components
             IFormFile file = new FormFile(ms, 0, ms.Length, "name", e.File.Name);
             this.Images.Add(file);
         }
-
-        protected override void OnInitialized()
-        {
-            this.inputModel = new();
-            this.editContext = new EditContext(this.inputModel);
-            this.Images = new List<IFormFile>();
-
-            base.OnInitialized();   
-        }
+        
         private async Task Save()
         {
             IDictionary<string, byte[]> ByteArrayData = new Dictionary<string, byte[]>();
@@ -74,14 +76,12 @@ namespace ServiceProvider.Client.Components
                     ByteArrayData.Add(image.FileName, destinationData);
                     repeatingFileNames.Add(image.FileName, 1);
                 }
-
             }
             
             this.inputModel.ByteArrayData = ByteArrayData;
             this.inputModel.ServiceId = this.ServiceId;
             await this.ImagesService.CreateAsync(this.inputModel);
             this.NavigationManager.NavigateTo($"publish/{this.ServiceId}");
-
         }
     }
 }

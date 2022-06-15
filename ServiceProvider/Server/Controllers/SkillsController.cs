@@ -22,7 +22,7 @@ namespace ServiceProvider.Server.Controllers
             this.skillsService = skillsService;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> AddSkill(AddSkillInputModel inputModel)
         {
             inputModel.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

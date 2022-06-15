@@ -9,7 +9,7 @@
         public RequirementMappingProfile()
         {
             this.CreateMap<Requirement, RequirementViewModel>();
-            this.CreateMap<Requirement, EditRequirementInputModel>();
+            this.CreateMap<Requirement, UpdateRequirementInputModel>();
         }
     }
 }

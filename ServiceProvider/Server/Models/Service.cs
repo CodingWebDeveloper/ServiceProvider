@@ -16,8 +16,6 @@
         [Key]
         public int Id { get; set; }
 
-        public double Rating { get; set; } = 0;
-
         public string Title { get; set; }
 
         public string UserId { get; set; }

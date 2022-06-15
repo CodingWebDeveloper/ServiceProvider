@@ -13,9 +13,9 @@ namespace ServiceProvider.Client.Services
 
         Task DeleteAsync(int requirementId);
 
-        Task UpdateAsync(EditRequirementInputModel inputModel);
+        Task UpdateAsync(UpdateRequirementInputModel inputModel);
 
-        Task<T> GetAsync<T>(int requirementId);
+        Task<T> GetById<T>(int requirementId);
 
         Task<IEnumerable<T>> GetAllBy<T>(int serviceId);
     }

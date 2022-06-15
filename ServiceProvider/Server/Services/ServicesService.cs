@@ -9,6 +9,7 @@ namespace ServiceProvider.Server.Services
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using System;
 
     public class ServicesService : IServicesService
     {
@@ -21,6 +22,13 @@ namespace ServiceProvider.Server.Services
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
+        }
+
+        public int CalculateRatingBy(int serviceId)
+        {
+            IEnumerable<Review> reviews = this.dbContext.Reviews;
+            int rating = (int)Math.Round(reviews.Sum(r => r.Rate) / reviews.Count());
+            return rating;
         }
 
         public async Task<int> CreateAsync(CreateServiceInputModel inputModel)
@@ -37,6 +45,11 @@ namespace ServiceProvider.Server.Services
             await this.dbContext.SaveChangesAsync();
 
             return service.Id;
+        }
+
+        public IEnumerable<T> GetAll<T>()
+        {
+            return this.mapper.ProjectTo<T>(this.dbContext.Services.Where(s => s.IsPublished));
         }
 
         public IEnumerable<T> GetAllBy<T>(string userId)

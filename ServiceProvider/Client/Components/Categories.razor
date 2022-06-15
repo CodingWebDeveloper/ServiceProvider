@@ -1,6 +1,6 @@
-﻿@page "/categories"
-<h3>AllCategories</h3>
+﻿@page "/categories/all-created"
 
+<MudText Typo="Typo.h3">All Categories</MudText>
 <style>
     #input-form {
         display: none;
@@ -21,15 +21,9 @@
     }
 </style>
 
-<EditForm id="input-form" Model="@this.model" OnValidSubmit="@Create">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <label class="item-wr">Category</label>
-    <InputText class="text-black-50 item-wr" @bind-Value="@this.model.Name" placholder="Category Name"/>
-    <button type="submit" class="btn btn-success text-white item-wr">Create</button>
-</EditForm>
 
-<main>
+
+@*<main>
     <section class="d-flex justify-content-center align-items-center">
         <table class="table table-bordered">
             <thead>
@@ -53,3 +47,36 @@
         </table>
     </section>
 </main>
+*@
+
+@if (this.openCreateForm)
+{
+    <CreateCategory LoadSkills="LoadCategories"/>
+}
+
+<MudItem Class="d-flex my-3">
+    <MudItem></MudItem>
+    <MudSpacer/>
+    <MudButton Variant="Variant.Filled" OnClick="OpenCreateForm">Create category</MudButton>
+</MudItem>
+
+
+<MudTable Items="@this.categories" Dense="false" Hover="true" Bordered="false" Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Categories</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="this.searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Nr</MudTh>
+        <MudTh>Name</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@(nr++)</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+

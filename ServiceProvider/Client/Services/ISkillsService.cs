@@ -8,7 +8,7 @@ namespace ServiceProvider.Client.Services
 {
     public interface ISkillsService
     {
-        Task AddSkill(AddSkillInputModel inputModel);
+        Task Create(AddSkillInputModel inputModel);
 
         Task<IEnumerable<T>> GetAllByUser<T>();
     }

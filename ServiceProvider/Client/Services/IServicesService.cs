@@ -19,5 +19,7 @@ namespace ServiceProvider.Client.Services
         Task PublishServiceBy(int serviceId);
 
         Task<T> GetById<T>(int serviceId);
+
+        Task<IEnumerable<T>> GetAll<T>();
     }
 }

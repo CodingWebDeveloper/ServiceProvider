@@ -1,0 +1,10 @@
+﻿<MudPaper Class="p-3 mt-3">
+    <EditForm Model="@this.inputModel" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+        <MudItem Class="d-flex">
+            <MudTextField @bind-Value="this.inputModel.Content" For="@(() => this.inputModel.Content)" T="string" Variant="Variant.Outlined" Label="Requirement Content" />
+            <MudButton ButtonType="ButtonType.Submit" Class="ml-3" Variant="Variant.Filled" Color="Color.Success">Update</MudButton>
+            <MudButton ButtonType="ButtonType.Button" OnClick="async () => await this.CancelUpdate.InvokeAsync()" Class="ml-3" Variant="Variant.Filled" Color="Color.Warning">Cancel</MudButton>
+        </MudItem>
+    </EditForm>
+</MudPaper>

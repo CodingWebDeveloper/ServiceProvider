@@ -1,9 +1,9 @@
-using MatBlazor;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MudBlazor.Services;
 using ServiceProvider.Client.Services;
 using System;
 using System.Collections.Generic;
@@ -33,6 +33,7 @@ namespace ServiceProvider.Client
             builder.Services.AddTransient<IPackagesService, PackagesService>();
             builder.Services.AddTransient<IImagesService, ImagesService>();
             builder.Services.AddTransient<IApplicationUsersService, ApplicationUsersService>();
+            builder.Services.AddMudServices();
 
             await builder.Build().RunAsync();
         }

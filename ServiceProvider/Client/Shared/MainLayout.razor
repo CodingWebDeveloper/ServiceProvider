@@ -1,18 +1,42 @@
 ﻿@inherits LayoutComponentBase
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <div class="main">
-        <div class="top-row px-4 auth">
-            <LoginDisplay />
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
 
-        <div class="content px-4">
+<MudLayout Style="color:#fe9c00">
+    <MudAppBar  Style="background-color: #fe9c00" Elevation="3" Fixed="false" Dense="true">
+        <MudIconButton OnClick="() => ToggleSidebar()" Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
+        <MudSpacer />
+        <LoginDisplay  />
+    </MudAppBar>
+   
+    <MudDrawer @bind-Open="sidebarOpen" Elevation="1">
+        <MudDrawerHeader>
+            <MudAvatar Color="Color.Transparent" Size="Size.Large" Image="logo/logo.jpg" />
+            <MudText Typo="Typo.h5" Style="margin-top: 10px; margin-left:15px;">SERVICE PROVIDER</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home">Home</MudNavLink>
+            <AuthorizeView>
+                <MudNavLink Href="/profile" Icon="@Icons.Filled.ManageAccounts">Manage Profille</MudNavLink>
+                <MudNavGroup Title = "Services">
+                    <MudNavLink Href="services/created-by-user">My Created Services</MudNavLink>
+                    <MudNavLink Href="services/create">Create <span class="badge badge-success">NEW</span> </MudNavLink>
+                </MudNavGroup>
+                 <MudNavLink Href="categories/all-created">Created Categories</MudNavLink>
+            </AuthorizeView>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent Class="pt-16 px-16">
+        <MudContainer Class="mt-6">
             @Body
-        </div>
-    </div>
-</div>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code{
+    private bool sidebarOpen = false;
+        private void ToggleSidebar() => sidebarOpen = !sidebarOpen;    
+}

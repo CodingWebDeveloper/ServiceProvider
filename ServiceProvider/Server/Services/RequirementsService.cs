@@ -49,7 +49,7 @@ namespace ServiceProvider.Server.Services
             return this.mapper.Map<T>(await this.dbContext.Requirements.FindAsync(new object[] { requirementId }));
         }
 
-        public async Task UpdateAsync(EditRequirementInputModel inputModel)
+        public async Task UpdateAsync(UpdateRequirementInputModel inputModel)
         {
             Requirement requirement = await this.dbContext.Requirements.FindAsync(new object[] { inputModel.Id });
 

@@ -19,5 +19,9 @@ namespace ServiceProvider.Server.Services
         Task PublishServiceBy(int serviceId);
 
         T GetById<T>(int serviceId);
+
+        IEnumerable<T> GetAll<T>();
+
+        int CalculateRatingBy(int serviceId);
     }
 }

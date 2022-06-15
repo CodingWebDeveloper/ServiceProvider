@@ -41,7 +41,7 @@ namespace ServiceProvider.Server.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(EditRequirementInputModel inputModel)
+        public async Task<IActionResult> Update(UpdateRequirementInputModel inputModel)
         {
             await this.requirementsService.UpdateAsync(inputModel);
             return this.Ok();
@@ -50,7 +50,7 @@ namespace ServiceProvider.Server.Controllers
         [HttpGet("requirement/{id}")]
         public async Task<IActionResult> GetBy(int id)
         {
-            return this.Ok(await this.requirementsService.GetAsync<EditRequirementInputModel>(id));
+            return this.Ok(await this.requirementsService.GetAsync<UpdateRequirementInputModel>(id));
         }
     }
 }

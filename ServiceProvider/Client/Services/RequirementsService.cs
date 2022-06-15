@@ -11,8 +11,8 @@ namespace ServiceProvider.Client.Services
     public class RequirementsService : IRequirementsService
     {
         private readonly HttpClient httpClient;
-        private const string REQUIREMENTS_HREF = "api/requirements";
 
+        private const string REQUIREMENTS_HREF = "api/requirements";
 
         public RequirementsService(HttpClient httpClient)
         {
@@ -34,12 +34,12 @@ namespace ServiceProvider.Client.Services
             return await this.httpClient.GetFromJsonAsync<IEnumerable<T>>($"{REQUIREMENTS_HREF}/{serviceId}");
         }
 
-        public async Task UpdateAsync(EditRequirementInputModel inputModel)
+        public async Task UpdateAsync(UpdateRequirementInputModel inputModel)
         {
            await this.httpClient.PutAsJsonAsync(REQUIREMENTS_HREF, inputModel);
         }
 
-        public async Task<T> GetAsync<T>(int requirementId)
+        public async Task<T> GetById<T>(int requirementId)
         {
             return  await this.httpClient.GetFromJsonAsync<T>($"{REQUIREMENTS_HREF}/requirement/{requirementId}");
         }

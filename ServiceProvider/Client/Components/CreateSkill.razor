@@ -1,0 +1,12 @@
+﻿<MudPaper Class="pa-4">
+    <MudForm @ref="this.form" @bind-IsValid="@this.success">
+            <MudTextField @bind-Value="this.inputModel.Name" T="string" Label="Skill name" Required="true" RequiredError="Skill name is required!" />
+            <MudSelect @bind-Value="this.inputModel.ExperienceType" T="string" Label="Experience Type"  AnchorOrigin="Origin.BottomCenter" Required="true" RequiredError="Experience Type is required!">
+                @foreach (var experienceType in this.experienceTypes)
+                {
+                    <MudSelectItem Value="@experienceType" />
+                }
+            </MudSelect>
+            <MudButton Variant="Variant.Filled" OnClick="Create" Disabled =@(!success) Class="ml-auto mt-3">Create</MudButton>
+    </MudForm>
+</MudPaper>

@@ -5,7 +5,6 @@
     public class CreateRequirementInputModel
     {
         [Required]
-        [MinLength(5)]
         public string Content { get; set; }
 
         public int ServiceId { get; set; }

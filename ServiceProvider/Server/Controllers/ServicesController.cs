@@ -22,7 +22,7 @@ namespace ServiceProvider.Server.Controllers
             this.servicesService = servicesService;
         }
 
-        [HttpPost]
+        [HttpPost("create-new")]
         public async Task<IActionResult> Create(CreateServiceInputModel inputModel)
         {
             inputModel.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -30,11 +30,17 @@ namespace ServiceProvider.Server.Controllers
             return this.Ok(serviceId);
         }
 
-        [HttpGet]
+        [HttpGet("created-by-user")]
         public IActionResult GetAllBy()
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             IEnumerable<ServiceViewModel> services = this.servicesService.GetAllBy<ServiceViewModel>(userId);
+
+            foreach (var service in services)
+            {
+                service.StartingPrice = this.servicesService.GetStartingPrice(service.Id);
+                service.Rating = this.servicesService.CalculateRatingBy(service.Id);
+            }
 
             return this.Ok(services);
         }
@@ -45,23 +51,29 @@ namespace ServiceProvider.Server.Controllers
             return this.Ok(this.servicesService.GetStartingPrice(serviceId));
         }
 
-        [HttpGet("service-info/{serviceId}")]
+        [HttpGet("info/{serviceId}")]
         public IActionResult GetById([FromRoute] int serviceId)
         {
             return this.Ok(this.servicesService.GetById<ServiceInfoViewModel>(serviceId));
         }
 
-        [HttpGet("service-unfinished-orders/{serviceId}")]
+        [HttpGet("unfinished-orders/{serviceId}")]
         public IActionResult GetUnfinishedOrdersBy([FromRoute] int serviceId)
         {
             return this.Ok(this.servicesService.GetUnfinishedOrdersBy(serviceId));
         }
 
-        [HttpPost("publish-service")]
+        [HttpPost("publish")]
         public async Task<IActionResult> PublishServiceBy([FromBody]int serviceId)
         {
             await this.servicesService.PublishServiceBy(serviceId);
             return this.Ok();
+        }
+
+        [HttpGet("all")]
+        public IActionResult GetAll()
+        {
+            return this.Ok(this.servicesService.GetAll<ServiceViewModel>());
         }
     }
 }

@@ -1,0 +1,28 @@
+﻿
+@*<MudPaper Class="w-75" Style="background: #d3eaf2">
+    <MudText Align="Align.Left"  Color="Color.Tertiary">
+    This the part where you start buidling your service, where you take the chance to deliver help,for the desired user's needs. 
+    Take your time and build your own organization.
+    </MudText>
+</MudPaper>*@
+<MudPaper Class="p-2 m-2">
+<EditForm Model="@this.inputModel" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudTextField @bind-Value="this.inputModel.Title" For="@(() => this.inputModel.Title)" T="string" Style="font-size:50px;" Lines="2"  Label="Title" Variant="Variant.Outlined" Placeholder="I will"
+            Counter="20" Immediate="true" Validation="@(new Func<string, IEnumerable<string>>(MaxCharactersTitle))"/>
+      <MudSelect @bind-Value="this.inputModel.CategoryId" Validation="@(new Func<int, bool>(CategoryValidate))" For="@(() => this.inputModel.CategoryId)" Class="mt-5" T="int" Variant="Variant.Outlined" Label="Category">
+          @foreach (var category in this.categories)
+          {
+                <MudSelectItem Value="@category.Id"> @category.Name </MudSelectItem>
+          }
+      </MudSelect>
+      <MudTextField @bind-Value="@this.inputModel.Description" For="@(() => this.inputModel.Description)" Class="mt-5" T="string" Style="font-size:30px;" Lines="4"  Label="Description" Variant="Variant.Outlined" Placeholder="Describe your service" 
+            Counter="150" Immediate="true" Validation="@(new Func<string, IEnumerable<string>>(MaxCaharctersDescription))" />
+      <MudItem Class="d-flex justify-content-end">
+          <MudButton ButtonType="ButtonType.Submit" Class="mt-3" Color="Color.Success" Variant="Variant.Filled">Save & Continue</MudButton>    
+      </MudItem>
+</EditForm>
+</MudPaper>
+
+
+
