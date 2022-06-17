@@ -30,8 +30,9 @@ namespace ServiceProvider.Client.Components
 
         private EditContext editContext;
         private UploadImagesInputModel inputModel;
+        private IFormFile UpdateFile;
 
-        private ICollection<IFormFile> Images;
+        private ICollection<IFormFile> Images = new List<IFormFile>();
 
         protected override void OnInitialized()
         {
@@ -45,11 +46,11 @@ namespace ServiceProvider.Client.Components
         private async Task OnChangeInputFile(InputFileChangeEventArgs e)
         {
             MemoryStream ms = new MemoryStream();
-            await e.File.OpenReadStream(2000000).CopyToAsync(ms);
+            await e.File.OpenReadStream(6000000).CopyToAsync(ms);
             IFormFile file = new FormFile(ms, 0, ms.Length, "name", e.File.Name);
             this.Images.Add(file);
         }
-        
+
         private async Task Save()
         {
             IDictionary<string, byte[]> ByteArrayData = new Dictionary<string, byte[]>();
@@ -81,7 +82,8 @@ namespace ServiceProvider.Client.Components
             this.inputModel.ByteArrayData = ByteArrayData;
             this.inputModel.ServiceId = this.ServiceId;
             await this.ImagesService.CreateAsync(this.inputModel);
-            this.NavigationManager.NavigateTo($"publish/{this.ServiceId}");
+            await this.IncreaseProccessStep.InvokeAsync();
+            //this.NavigationManager.NavigateTo($"publish/{this.ServiceId}");
         }
     }
 }

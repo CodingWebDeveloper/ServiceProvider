@@ -1,4 +1,10 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+@inherits LayoutComponentBase
 <MudThemeProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
@@ -20,7 +26,15 @@
         <MudNavMenu>
             <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home">Home</MudNavLink>
             <AuthorizeView>
-                <MudNavLink Href="/profile" Icon="@Icons.Filled.ManageAccounts">Manage Profille</MudNavLink>
+                <MudNavGroup Icon="@Icons.Filled.ManageAccounts" Title="Manage Profile">
+                    <MudNavLink Icon="@Icons.Material.Filled.RemoveRedEye" Href="/profile">View My Account</MudNavLink>
+                    @*<MudNavLink Class="mr-2 text-decoration-none" Href="authentication/profile">@context.User.Identity.Name</MudNavLink>*@
+                    <MudNavLink>
+                        <MudButton Class="nav-link" Variant="Variant.Filled" Color="Color.Warning" OnClick="this.BeginSignOut">
+                            Log out
+                        </MudButton>
+                    </MudNavLink>
+                </MudNavGroup>
                 <MudNavGroup Title = "Services">
                     <MudNavLink Href="services/created-by-user">My Created Services</MudNavLink>
                     <MudNavLink Href="services/create">Create <span class="badge badge-success">NEW</span> </MudNavLink>
@@ -38,5 +52,11 @@
 
 @code{
     private bool sidebarOpen = false;
-        private void ToggleSidebar() => sidebarOpen = !sidebarOpen;    
+        private void ToggleSidebar() => sidebarOpen = !sidebarOpen;
+    
+        private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
 }

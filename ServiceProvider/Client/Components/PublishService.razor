@@ -1,20 +1,18 @@
-﻿@using BlafettisLib
+﻿@page "/publish/{ServiceId:int}"
+@using BlafettisLib
 
-@page "/publish/{ServiceId:int}"
-
- <Roadmap  CurrentStep="Publish"/>
-
-<div class="d-flex justify-content-center align-items-center">
-    <div>
-        <div class="d-flex flex-column justify-content-center align-items-center p-lg-5 p-md-4 p-sm-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;">
-            <h1 class=" my-2">Congrats</h1>
-            <p class="text-center" style="word-break:normal; width: 150px">You are finally one step close of starting your own service, beginning your business and helping others.</p>
+<MudItem Class="d-flex justify-content-center align-items-center">
+    <MudCard Class="w-75">
+        <MudCardContent>
+            <MudText Align="Align.Center" Typo="Typo.h2">Congrats</MudText>
+            <MudText Align="Align.Center" Typo="Typo.body2">You are finally one step close of starting your own service, beginning your business and helping others.</MudText>
             <Blafettis @ref="this.blafettis" />
-        </div>
-        <div class="d-flex justify-content-end mt-5">
-            <button class="btn btn-success" style="display:@this.btnShow" @onclick="this.Publish">
+        </MudCardContent>
+        <MudCardActions Class="d-flex justify-content-end">
+            <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="this.Publish">
                 Publish Service
-            </button>
-        </div>
-    </div>
-</div>
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudItem>
+

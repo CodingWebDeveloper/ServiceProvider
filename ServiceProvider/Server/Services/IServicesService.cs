@@ -12,7 +12,7 @@ namespace ServiceProvider.Server.Services
 
         IEnumerable<T> GetAllBy<T>(string userId);
 
-        double GetStartingPrice(int serviceId);
+        decimal GetStartingPrice(int serviceId);
 
         int GetUnfinishedOrdersBy(int serviceId);
 

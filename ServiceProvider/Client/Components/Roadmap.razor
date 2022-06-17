@@ -1,6 +1,43 @@
-﻿<div class="d-flex my-3" style="height: 30px;">
+﻿
+    <MudList Class="d-flex flex-column flex-sm-row justify-content-center align-items-baseline align-items-sm-center">
+        <MudListItem IconSize="Size.Medium" Avatar="@Icons.Material.Filled.Preview" IconColor="this.CurrentStep == 1 ? Color.Success : Color.Default">
+            <MudText Class="d-none d-md-block">Overview</MudText>
+        </MudListItem>
+        <MudIcon Class="d-none d-sm-block" Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowRight" />
+        <MudIcon Class="d-block d-sm-none" Spn Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowDown" />
+        <MudListItem IconSize="Size.Medium" Avatar="@Icons.Material.Filled.ViewList" IconColor="this.CurrentStep == 2 ? Color.Success : Color.Default">
+            <MudText Class="d-none d-md-block">
+                Requirements
+            </MudText>
+        </MudListItem>
+        <MudIcon Class="d-none d-sm-block" Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowRight" />
+        <MudIcon Class="d-block d-sm-none" Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowDown" />
+        
+         <MudListItem IconSize="Size.Medium"  Avatar="@Icons.Material.Filled.AttachMoney" IconColor="this.CurrentStep == 3 ? Color.Success : Color.Default">
+            <MudText Class="d-none d-md-block">
+                Pricing
+            </MudText>
+        </MudListItem>
+        <MudIcon Class="d-none d-sm-block" Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowRight" />
+        <MudIcon Class="d-block d-sm-none" Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowDown" />
+
+       <MudListItem IconSize="Size.Medium"   Avatar="@Icons.Material.Filled.Image" IconColor="this.CurrentStep == 4 ? Color.Success : Color.Default">
+            <MudText Class="d-none d-md-block">
+                Gallery
+            </MudText>
+        </MudListItem>
+        <MudIcon Class="d-none d-sm-block" Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowRight" />
+        <MudIcon Class="d-block d-sm-none" Size="Size.Large" Icon="@Icons.Filled.KeyboardArrowDown" />
+
+        <MudListItem IconSize="Size.Medium"  Avatar="@Icons.Material.Filled.Publish" IconColor="this.CurrentStep == 5 ? Color.Success : Color.Default">
+            <MudItem Class="d-none d-md-block">
+                Publish
+            </MudItem>
+        </MudListItem>
+    </MudList>
+@*<div class="d-flex my-3" style="height: 30px;">
     <div class="d-flex">
-        @if (!string.IsNullOrEmpty(this.CurrentStep) && this.CurrentStep == "Overview")
+        @if (this.CurrentStep == 1)
         {
             <svg xmlns="http://www.w3.org/2000/svg" class="p-1" style="background-color: limegreen; border-radius: 50%; display: flex; color: white; justify-content: center; align-items: center"
                  height="30" width="30"
@@ -16,7 +53,7 @@
     </svg>
     <div class="d-flex">
 
-        @if (!string.IsNullOrEmpty(this.CurrentStep) && this.CurrentStep == "Requirements")
+        @if (this.CurrentStep == 2)
         {
             <svg xmlns="http://www.w3.org/2000/svg" class="p-1" style="background-color: limegreen; border-radius: 50%; display: flex; color: white; justify-content: center; align-items: center"
                  height="30" width="30"
@@ -37,7 +74,7 @@
         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
     </svg>
     <div class="d-flex">
-        @if (!string.IsNullOrEmpty(this.CurrentStep) && this.CurrentStep == "Pricing")
+        @if (this.CurrentStep == 3)
         {
             <svg xmlns="http://www.w3.org/2000/svg" class="p-1" style="background-color:limegreen; border-radius:50%;display:flex;color:white; justify-content:center; align-items:center"
                  height="30" width="30"
@@ -58,7 +95,7 @@
         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
     </svg>
     <div class="d-flex">
-        @if (!string.IsNullOrEmpty(this.CurrentStep) && this.CurrentStep == "Gallery")
+        @if ( this.CurrentStep == 4)
         {
             <svg xmlns="http://www.w3.org/2000/svg" class="p-1" style="background-color: limegreen; border-radius: 50%; display: flex; color: white; justify-content: center; align-items: center"
                  height="30" width="30"
@@ -79,7 +116,7 @@
         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
     </svg>
     <div class="d-flex">
-        @if (!string.IsNullOrEmpty(this.CurrentStep) && this.CurrentStep == "Publish")
+        @if (this.CurrentStep == 5)
         {
             <svg xmlns="http://www.w3.org/2000/svg" class="p-1" style="background-color: limegreen; border-radius: 50%; display: flex; color: white; justify-content: center; align-items: center"
                  height="30" width="30"
@@ -96,11 +133,11 @@
         }
         <p class="align-items-center mx-2">Publish</p>
     </div>
-</div>
+</div>*@
 
 @code{
 
     [Parameter]
-    public string CurrentStep { get; set; }
+    public int CurrentStep { get; set; }
 
 }

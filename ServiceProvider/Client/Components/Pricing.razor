@@ -1,243 +1,156 @@
 ﻿@page "/pricing/{ServiceId:int}"
 
-<style>
-    .container-pricing {
-        display: grid;
-    }
-
-    .package {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #dee2e6;
-        width: inherit;
-        height: inherit;
-        position: relative;
-        font-weight: bold;
-        color: darkgray;
-        font-size: 18px;
-    }
-
-    .package-item {
-        display: flex;
-        border: 1px solid #dee2e6;
-        align-items: center;
-        justify-content: center;
-        width: inherit;
-        height: 6.8rem;
-        font-size: 10px;
-        position: relative;
-    }
-
-    .package-items {
-        height: 5rem;
-        width: 10rem;
-    }
-
-    .svg {
-        height: 25px;
-        width: 25px;
-    }
-
-    .material-item {
-        display: flex;
-        border: 1px solid #dee2e6;
-        height: 5rem;
-        width: 10rem;
-        align-items: start;
-        justify-content: flex-start;
-    }
-
-    .svg:hover {
-        cursor: pointer;
-        transform: scale(1.05);
-        transition: transform 250ms ease-in;
-    }
-</style>
-
-<Roadmap CurrentStep="Pricing"/>
-
-<h3>Pricing</h3>
-<hr />
-<div class="d-flex justify-content-center align-items-center my-5">
-    <div class="d-flex justify-content-center align-items-center">
-        <div>
-            <div class="d-flex">
-                <div>
-                    <div style="height: 39.5vh; width: 30vh; border: 1px solid #dee2e6">
-                    </div>
-                    <div>
-                        <div class="package-item" style="width:30vh; height:6.8rem;">
-                            Delivery Days
-                        </div>
-                    </div>
-                    <div>
-                        <div class="package-item" style="width:30vh; height:6.8rem;">
-                            Price
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <EditForm EditContext="this.EditContextBasicPackage">
-                        
-                        <div class="package-items">
-                            <div class="package">
-                                Basic
-                            </div>
-                            <div class="package-item">
-                               
-                                <InputTextArea class="form-control" @bind-Value="this.BasicPackageInputModel.Title" />
-                            </div>
-                            <div class="package-item">
-                                <InputTextArea class="form-control" @bind-Value="this.BasicPackageInputModel.Details" />
-                            </div>
-                            <div class="package-item">
-                                <InputSelect class="form-control" @bind-Value="this.BasicPackageInputModel.DeliveryDays">
-                                    @for (int i = 1; i <= 10; i++)
-                                    {
-                                        <option>@i</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="package-item">
-                                <InputNumber class="form-control" @bind-Value="this.BasicPackageInputModel.Price" />
-                            </div>
-                        </div>
-                    </EditForm>
-                    <EditForm EditContext="this.EditContextStandardPackage">
-                       
-                        <div class="package-items">
-                            <div class="package">
-                                Standard
-                            </div>
-                            <div class="package-item">
-                               
-                                <InputTextArea class="form-control" @bind-Value="this.StandardPackageInputModel.Title" />
-                            </div>
-                            <div class="package-item">
-                                <InputTextArea class="form-control" @bind-Value="this.StandardPackageInputModel.Details" />
-                            </div>
-                            <div class="package-item">
-                                <InputSelect class="form-control" @bind-Value="this.StandardPackageInputModel.DeliveryDays">
-                                    @for (int i = 1; i <= 10; i++)
-                                    {
-                                        <option>@i</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="package-item">
-                                <InputNumber class="form-control" @bind-Value="this.StandardPackageInputModel.Price" />
-                            </div>
-                        </div>
-                    </EditForm>
-                    <EditForm EditContext="this.EditContextPremiumPackage">
-                        <div class="package-items">
-                            <div class="package">
-                                Premium
-                            </div>
-                            <div class="package-item">
-                                
-                                <InputTextArea class="form-control" @bind-Value="this.PremiumPackageInputModel.Title" />
-                            </div>
-                            <div class="package-item">
-                                <InputTextArea class="form-control" @bind-Value="this.PremiumPackageInputModel.Details" />
-                            </div>
-                            <div class="package-item">
-                                <InputSelect class="form-control" @bind-Value="this.PremiumPackageInputModel.DeliveryDays">
-                                    @for (int i = 1; i <= 10; i++)
-                                    {
-                                        <option>@i</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="package-item">
-                                <InputNumber class="form-control" @bind-Value="this.PremiumPackageInputModel.Price" />
-                            </div>
-                        </div>
-                    </EditForm>
-                </div>
-            </div>
-            <div class="bg-secondary text-white p-1 align-items-center position-relative">
-                <div class="d-flex m-1">
-                    <div class="flex-grow-1">
-                        <p>
-                            Materials
-                        </p>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="svg" @onclick="() => this.AddMaterial()" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div>
-                @foreach (var material in this.materials)
-                {
-                    <div class="d-flex">
-                        <div class="material-item justify-content-center align-items-center" style="width:14.5rem;">
-                            @material.Value.Name
+<MudText Typo="Typo.h3">Pricing</MudText>
+<MudDivider  Class="my-6"/>
+<MudGrid Justify="Justify.Center" Class="w-100 my-15">
+    <MudItem>
+        <MudPaper Class="p-4">
+             <table>
+        <tr>
+            <MudGrid>
+                <MudItem xs="12" sm="4" Class="d-none d-sm-block">
+                    <th>Basic</th>
+                </MudItem>
+                <MudItem xs="12" sm="4" Class="d-none d-sm-block">
+                    <th>Standard</th>
+                </MudItem>
+                <MudItem xs="12" sm="4" Class="d-none d-sm-block">
+                    <th>Premium</th>
+                </MudItem>
+            </MudGrid>
+        </tr>
+        <tr>
+            <MudGrid>
+                <MudItem xs="12" sm="4">
+                    <td>
+                        <MudItem xs="12" sm="4" Class="d-block d-sm-none">
+                            <th>Basic</th>
+                        </MudItem>
+                        <EditForm EditContext="this.EditContextBasicPackage">
+                            <DataAnnotationsValidator />
+                            <MudTextField Lines="2" T="string" Label="Title" @bind-Value="this.BasicPackageInputModel.Title" For="@(() => this.BasicPackageInputModel.Title)" Variant="Variant.Filled" />
+                            <MudTextField Lines="3" T="string" Label="Details" @bind-Value="this.BasicPackageInputModel.Details" For="@(() => this.BasicPackageInputModel.Details)" Variant="Variant.Outlined"></MudTextField>
+                            <MudSelect T="int" Label="Delivery Days" @bind-Value="this.BasicPackageInputModel.DeliveryDays" For="@(() => this.BasicPackageInputModel.DeliveryDays)" Variant="Variant.Outlined">
+                                 @foreach(int num in this.deliveryDays)
+                                 {
+                                        <MudSelectItem Value="@num"> @num</MudSelectItem>
+                                 }         
+                            </MudSelect>
+                            <MudTextField @bind-Value="this.BasicPackageInputModel.Price" For="@(() => this.BasicPackageInputModel.Price)" Label="Price" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning" />
+                        </EditForm>
+                    </td>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <td>
+                        <MudItem xs="12" sm="4" Class="d-block d-sm-none">
+                            <th>Standard</th>
+                        </MudItem>
+                        <EditForm EditContext="this.EditContextStandardPackage">
+                            <DataAnnotationsValidator/>
+                            <MudTextField Lines="2" T="string" Label="Title" @bind-Value="this.StandardPackageInputModel.Title" For="@(() => this.StandardPackageInputModel.Title)" Variant="Variant.Filled" />
+                            <MudTextField Lines="3" T="string" Label="Details" @bind-Value="this.StandardPackageInputModel.Details" For="@(() => this.StandardPackageInputModel.Details)" Variant="Variant.Outlined"></MudTextField>
+                            <MudSelect T="int" Label="Delivery Days" @bind-Value="this.StandardPackageInputModel.DeliveryDays" For="@(() => this.StandardPackageInputModel.DeliveryDays)" Variant="Variant.Outlined">
+                                @foreach(int num in this.deliveryDays)
+                                 {
+                                        <MudSelectItem Value="@num"> @num</MudSelectItem>
+                                 } 
+                            </MudSelect>
+                            <MudTextField @bind-Value="this.StandardPackageInputModel.Price" For="@(() => this.StandardPackageInputModel.Price)" Label="Price" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning" />
+                        </EditForm>
+                    </td>
+                </MudItem>
+                <MudItem xs="12" sm="4">
+                    <td>
+                        <MudItem xs="12" sm="4" Class="d-block d-sm-none">
+                            <th>Premium</th>
+                        </MudItem>
+                        <EditForm EditContext="this.EditContextPremiumPackage">
+                            <DataAnnotationsValidator />
+                            <MudTextField Lines="2" T="string" Label="Title" @bind-Value="this.PremiumPackageInputModel.Title" For="@(() => this.PremiumPackageInputModel.Title)" Variant="Variant.Filled" />
+                            <MudTextField Lines="3" T="string" Label="Details" @bind-Value="this.PremiumPackageInputModel.Details" For="@(() => this.PremiumPackageInputModel.Details)" Variant="Variant.Outlined"></MudTextField>
+                            <MudSelect T="int" Label="Delivery Days" @bind-Value="this.PremiumPackageInputModel.DeliveryDays" For="@(() => this.PremiumPackageInputModel.DeliveryDays)" Variant="Variant.Outlined">
+                                @foreach(int num in this.deliveryDays)
+                                 {
+                                        <MudSelectItem Value="@num"> @num</MudSelectItem>
+                                 }  
+                            </MudSelect>
+                            <MudTextField @bind-Value="this.PremiumPackageInputModel.Price" For="@(() => this.PremiumPackageInputModel.Price)" Label="Price" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning" />
+                        </EditForm>
+                    </td>
+                </MudItem>
+            </MudGrid>
+        </tr>
+        <tr>
+            <td colspan="3" class="bg-secondary">
+                <MudItem Class="d-flex align-items-center">
+                    <MudText Typo="Typo.subtitle2" Class="ml-3">
+                        Materials
+                    </MudText>
+                    <MudSpacer/>
+                    <MudIconButton OnClick="AddMaterial" Icon="@Icons.Material.Filled.AddCircle"></MudIconButton>
+                </MudItem>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                    @foreach (var material in this.materials)
+                    {
+                        <MudItem Class="d-flex justify-content-around">
                             <EditForm Model="@material.Value">
-                                <InputText @bind-Value="@material.Value.Name" />
+                                <DataAnnotationsValidator />
+                                <MudTextField Label="Material" Variant="Variant.Text" T="string" @bind-Value="material.Value.Name" For="@(() => material.Value.Name)"/>
                             </EditForm>
-                        </div>
-                        @if (!this.BasicPackageInputModel.Materials.Any(m => m == material.Value))
-                        {
-                            <div class="material-item justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(1,material.Key)">
-                                    <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="material-item justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        }
+                           
+                            <MudDivider  Vertical="true" FlexItem="true"/>
+                            <MudItem>
+                                @if (!this.BasicPackageInputModel.Materials.Any(m => m == material.Value))
+                                {
+                                    <MudIconButton Icon="@Icons.Filled.Block" OnClick="() => this.AddMaterialToPackage(1, material.Key)"></MudIconButton>
+                                }
+                                else
+                                {
+                                    <MudIconButton Icon="@Icons.Filled.Check" OnClick="() => this.RemoveMaterialFromPackage(1, material.Key)"></MudIconButton>
+                                }
+                                <MudChip>Basic</MudChip>
+                            </MudItem>
+                            <MudDivider  Vertical="true" FlexItem="true"/>
+                            <MudItem>
+                                @if (!this.StandardPackageInputModel.Materials.Any(m => m == material.Value))
+                                {
+                                    <MudIconButton Icon="@Icons.Filled.Block" OnClick="() => this.AddMaterialToPackage(2, material.Key)"></MudIconButton>
+                                }
+                                else
+                                {
+                                    <MudIconButton Icon="@Icons.Filled.Check" OnClick="() => this.RemoveMaterialFromPackage(2, material.Key)"></MudIconButton>
+                                }
+                                <MudChip>Standard</MudChip>
+                            </MudItem>
+                            
+                            <MudDivider  Vertical="true" FlexItem="true"/>
 
-                        @if (!this.StandardPackageInputModel.Materials.Any(m => m == material.Value))
-                        {
-                            <div class="material-item justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(2, material.Key)">
-                                    <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="material-item justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        }
-
-                        @if (!this.PremiumPackageInputModel.Materials.Any(m => m == material.Value))
-                        {
-                            <div class="material-item justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor" @onclick="() => this.CheckMaterialToPackage(3, material.Key)">
-                                    <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-
-                        }
-                        else
-                        {
-                            <div class="material-item justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-</div>
-<div class="d-flex justify-content-end align-items-end">
-    <button disabled="@this.Disabled" class="btn btn-success text-white" @onclick="this.Save">Save&Continue</button>
-</div>
+                            <MudItem>
+                                @if (!this.PremiumPackageInputModel.Materials.Any(m => m == material.Value))
+                                {
+                                    <MudIconButton Icon="@Icons.Filled.Block" OnClick="() => this.AddMaterialToPackage(3, material.Key)"></MudIconButton>
+                                }
+                                else
+                                {
+                                    <MudIconButton Icon="@Icons.Filled.Check" OnClick="() => this.RemoveMaterialFromPackage(3, material.Key)"></MudIconButton>
+                                }
+                                <MudChip>Premium</MudChip>
+                            </MudItem>
+                            <MudDivider  Vertical="true" FlexItem="true"/>
+                        </MudItem>
+                    }
+            </td>
+        </tr>
+        </table>
+        </MudPaper>
+    </MudItem>
+    <MudItem sm="12" Class="d-flex justify-content-end">
+        <MudButton Class="mx-1" OnClick="Validate" Variant="Variant.Filled" Color="Color.Success">Validate Form</MudButton>
+        <MudButton Class="mx-1" OnClick="this.Save" Disabled="@(this.Disabled == "disabled" ? true : false)" Variant="Variant.Filled" Color="Color.Success">
+            Save&Continue
+        </MudButton>
+    </MudItem>
+</MudGrid>

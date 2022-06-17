@@ -1,77 +1,25 @@
 ﻿@page "/services/create"
-
-<style>
-    .input-form {
-        position:relative;
-        padding:1rem;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-    }
-
-    .input{
-        width: inherit;
-        width: 50%;
-        height: 10rem;
-        overflow-y:scroll;
-        overflow-x:hidden;
-        font-size: 3.5rem;
-        color:gray;
-    }
-
-    .input-description{
-        height: 10rem;
-        width: inherit;
-        width: 50%;
-    }
-
-
-</style>
 <h3>Create Service</h3>
 
-@*<Roadmap CurrentStep="Overview"/>*@
-
-@*<EditForm class="rounded input-form" Model="this.model" OnValidSubmit="@this.Create">
-    <div class="d-flex my-md-5 my-lg-5 my-sm-5 my-xl-5">
-        <label class="mx-1">Service Title</label>
-        <InputTextArea class="input justify-content-center"  @bind-Value="@this.model.Title" />
-    </div>
-    <div class="d-flex my-md-5 my-lg-5 my-sm-5 my-xl-5">
-        <label class="mx:1">Category</label>
-        <select class="custom-select justify-content-center" @onchange="@this.OnCategoryChanged" title="Category">
-            <option value="Select" selected disabled="disabled">
-                SELECT A CATEGORY
-            </option>
-            @foreach (var item in this.model.ListItems)
-            {
-                <option value="@item.Id">@item.Name</option>
-            }
-        </select>
-    </div>
-    <div class="d-flex my-md-5 my-lg-5 my-sm-5 my-xl-5" style="position:relative">
-        <label class="mx-1 " >Description</label>
-        <InputTextArea  @oninput="@this.OnValueChanged" placeholder="Enter Description..." class="input-description" @bind-Value="@this.model.Description" />
-        <span class="text-black-50 position-relative" style="justify-self:flex-end">@this.descriptionLength/150</span>
-    </div>
-   
-    <button class="btn btn-success position-absolute" style="left:85%;bottom:5%;margin-top: 10px;" >Save & Continue</button>
-</EditForm>*@
+<Roadmap CurrentStep="@this.currentProccessStep"/>
 
 <MudItem Class="d-flex flex-column justify-content-center align-items-center">
     @switch (this.currentProccessStep)
     {
         case 1:
-            <OverviewCreateService IncreaseProccessStep="this.IncreaseProccessStep" />
+            <OverviewCreateService IncreaseProccessStep="this.IncreaseProccessStep" GetServiceId="this.GetServiceId" />
             break;
         case 2:
-            <Requirements IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+            <Requirements IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId" />
             break;
         case 3:
-            <Pricing IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+            <Pricing IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId" />
             break;
         case 4:
-            <Gallery IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+             <Gallery IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId" />
             break;
         case 5:
-            <PublishService IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId"/>
+            <PublishService IncreaseProccessStep="this.IncreaseProccessStep" ServiceId="this.serviceId" />
             break;
     }
 </MudItem>

@@ -8,8 +8,10 @@
     {
         public ServiceMappingProfile()
         {
-            this.CreateMap<Service, ServiceViewModel>();
+            this.CreateMap<Service, ServiceViewModel>()
+                .ForMember(s => s.Images, x => x.MapFrom(y => y.Images));
             this.CreateMap<Service, ServiceInfoViewModel>();
         }
+
     }
 }

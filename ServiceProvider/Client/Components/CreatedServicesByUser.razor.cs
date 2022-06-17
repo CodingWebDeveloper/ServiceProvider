@@ -12,9 +12,14 @@ namespace ServiceProvider.Client.Components
         [Inject]
         public IServicesService ServicesService { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         private IEnumerable<ServiceViewModel> services;
 
         private Transition transition = Transition.Slide;
+
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -32,6 +37,11 @@ namespace ServiceProvider.Client.Components
             //}
 
             this.StateHasChanged();
+        }
+
+        private void GotToServiceDetails(int serviceId)
+        {
+            this.NavigationManager.NavigateTo($"services/service-details/{serviceId}");
         }
     }
 }

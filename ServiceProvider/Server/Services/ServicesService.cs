@@ -62,9 +62,9 @@ namespace ServiceProvider.Server.Services
             return this.mapper.ProjectTo<T>(this.dbContext.Services.Where(s=>s.Id == serviceId)).FirstOrDefault();
         }
 
-        public double GetStartingPrice(int serviceId)
+        public decimal GetStartingPrice(int serviceId)
         {
-            double price = 5;
+            decimal price = 0;
             var service = this.dbContext.Services.Select(x => new
             {
                 Id = x.Id,

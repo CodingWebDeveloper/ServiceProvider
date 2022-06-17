@@ -19,6 +19,7 @@ namespace ServiceProvider.Shared.PackageModels
         public string Details { get; set; }
 
         [Required]
+        [Range(1,10)]
         public int DeliveryDays { get; set; }
 
         public string PackageType { get; set; }
@@ -26,7 +27,8 @@ namespace ServiceProvider.Shared.PackageModels
         public int ServiceId { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        [Range(0, 10_000)]
+        public decimal Price { get; set; }
 
         [Required]
         public ICollection<CreateMaterialInputModel> Materials { get; set; }

@@ -15,6 +15,6 @@
         public int Rating { get; set; } 
 
         [IgnoreMap]
-        public double StartingPrice { get; set; }
+        public decimal StartingPrice { get; set; }
     }
 }

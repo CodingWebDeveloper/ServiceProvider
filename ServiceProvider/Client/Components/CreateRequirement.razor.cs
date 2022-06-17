@@ -20,10 +20,6 @@ namespace ServiceProvider.Client.Components
         [Inject]
         public IRequirementsService RequirementsService { get; set; }
 
-        [Inject]
-        //public NavigationManager NavigationManager { get; set; }
-
-
         private CreateRequirementInputModel inputModel = new CreateRequirementInputModel();
 
         private async Task Create()

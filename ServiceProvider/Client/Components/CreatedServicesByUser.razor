@@ -4,37 +4,50 @@
 <MudDivider Class="mb-16" />
 @if(this.services != null)
 {
-    <MudGrid Spacing="2" Justify="Justify.Center">
+    <MudGrid>
         @foreach(var service in this.services)
         {
-            <MudCard>
-                    <MudCarousel Class="mud-width-full" Style="height:200px;" ShowArrows="true" ShowBullets="false" AutoCycle="false" TData="object">
+           <MudItem xs="12" md="6">
+                <MudCard>
+                    <MudCarousel Class="mud-width-full" Style="height:220px;" ShowArrows="true" ShowBullets="false" AutoCycle="false" TData="object">
                         @if (service.Images != null)
                         {
                             foreach (var image in service.Images)
                             {
-                                <MudCarouselItem Transition="transition" Color="@Color.Primary">
-                                    <div class="d-flex" style="height:100%">
-                                        <MudCardMedia Class="mx-auto my-auto" Height="200" Image="@image.RemoteUrl" />
-                                    </div>
+                                <MudCarouselItem Class="d-flex justify-content-center" Transition="transition" Color="@Color.Primary">
+                                     <img height="340" width="340" src="@image.RemoteUrl" class="mx-auto my-auto rounded-lg " style="object-fit:contain;"  />
                                 </MudCarouselItem>
                             } 
                         }
                     </MudCarousel>
                     <MudCardContent>
-                        <MudText Typo="Typo.h4">@service.Title</MudText>
+                        <MudButton HtmlTag="a" Class="text-break" Typo="Typo.h6" OnClick="@(() => this.GotToServiceDetails(service.Id))" >@service.Title</MudButton>
                         <MudItem>
-                            <MudSpacer/>
-                            <MudRating SelectedValue="@service.Rating" />
-                            <MudItem>
-                                <MudText Typo="Typo.h6" Class="justify-content-center" Color="Color.Success">
-                                    STARTING AT<br/>
-                                    @service.StartingPrice
-                                </MudText>
+                            <MudRating Class="my-1" SelectedValue="@service.Rating" Disabled="true" />
+                            <MudItem Class="d-flex">
+                                    <MudItem>
+                                        <MudText Typo="Typo.h6" Class="justify-content-center" Color="Color.Success">
+                                            <MudText Typo="Typo.body2">
+                                                STARTING AT
+                                            </MudText>
+                                            <MudList>
+                                                <MudListItem IconSize="Size.Small" Avatar="@Icons.Material.Filled.AttachMoney">
+                                                    @service.StartingPrice
+                                                </MudListItem>
+                                            </MudList>
+                                        </MudText>
+                                    </MudItem>
+                                    <MudSpacer />
+                                    <MudDivider Vertical="true" FlexItem="true" />
+                                    <MudItem>
+                                        <MudText Typo="Typo.h6">Creator</MudText>
+                                        <MudText Typo="Typo.subtitle1">Miroslav Uzunov</MudText>
+                                    </MudItem>
                             </MudItem>
                         </MudItem>
                     </MudCardContent>
-            </MudCard>
+                </MudCard>
+           </MudItem>
         } 
     </MudGrid>
 }

@@ -3,35 +3,42 @@
     <MudGrid Spacing="2" Justify="Justify.Center">
         @foreach(var service in this.services)
         {
-            <MudCard>
-                    <MudCarousel Class="mud-width-full" Style="height:200px;" ShowArrows="true" ShowBullets="false" AutoCycle="false" TData="object">
-                        @if (service.Images != null)
-                        {
-                            foreach (var image in service.Images)
+             @if (service.Images != null)
+             {
+                 <h1>Hello</h1>
+                 foreach (var image in service.Images)
+                 {
+                          <img height="220" width="220" src="@image.RemoteUrl" class="mx-auto my-auto rounded-lg" style="object-fit:contain;"  />
+                 } 
+             }
+             <MudItem xs="12" sm="4">
+               <MudCard>
+                        <MudCarousel Class="mud-width-full" Style="height:320px;" ShowArrows="true" ShowBullets="false" AutoCycle="false" TData="object">
+                            @if (service.Images != null)
                             {
-                                <MudCarouselItem Transition="transition" Color="@Color.Primary">
-                                    <div class="d-flex" style="height:100%">
-                                        <MudCardMedia Class="mx-auto my-auto" Height="200" Image="@image.RemoteUrl" />
-                                    </div>
-                                </MudCarouselItem>
-                            } 
-                        }
-                    </MudCarousel>
-                    <MudCardContent>
-                        <MudText Typo="Typo.h4">@service.Title</MudText>
-                        <MudItem>
-                            <MudSpacer/>
-                            <MudRating SelectedValue="@service.Rating" />
+                                foreach (var image in service.Images)
+                                {
+                                    <MudCarouselItem Transition="transition" Color="@Color.Primary">
+                                         <img height="220" width="220" src="@image.RemoteUrl" class="mx-auto my-auto rounded-lg" style="object-fit:contain;"  />
+                                    </MudCarouselItem>
+                                } 
+                            }
+                        </MudCarousel>
+                        <MudCardContent>
+                            <MudText Typo="Typo.h6">@service.Title</MudText>
                             <MudItem>
-                                <MudText Typo="Typo.h6" Class="justify-content-center" Color="Color.Success">
-                                    STARTING AT<br/>
-                                    @service.StartingPrice
-                                </MudText>
+                                <MudSpacer/>
+                                <MudRating SelectedValue="@service.Rating" />
+                                <MudItem>
+                                    <MudText Typo="Typo.h6" Class="justify-content-center" Color="Color.Success">
+                                        STARTING AT<br/>
+                                        @service.StartingPrice
+                                    </MudText>
+                                </MudItem>
                             </MudItem>
-                        </MudItem>
-                    </MudCardContent>
-            </MudCard>
-             
+                        </MudCardContent>
+                </MudCard>
+             </MudItem>
         } 
     </MudGrid>
 }

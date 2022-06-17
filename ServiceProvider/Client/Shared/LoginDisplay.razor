@@ -5,13 +5,10 @@
 @inject SignOutSessionStateManager SignOutManager
 
 <AuthorizeView>
-    <Authorized>
-        <MudLink Class="text-white mr-2 text-decoration-none" Href="authentication/profile">@context.User.Identity.Name!</MudLink>
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
-    </Authorized>
+    
     <NotAuthorized>
-        <MudLink Class="text-white mr-2 text-decoration-none" Href="authentication/register">Register</MudLink>
-        <MudLink Class="text-white text-decoration-none" Href="authentication/login">Log in</MudLink>
+        <MudLink Class="text-white mr-2 text-decoration-none" Color="Color.Default" Href="authentication/register">Register</MudLink>
+        <MudLink Class="text-white text-decoration-none" Color="Color.Default" Href="authentication/login">Log in</MudLink>
     </NotAuthorized>
 </AuthorizeView>
 

@@ -30,18 +30,19 @@
 
         private string Disabled { get; set; } = "disabled";
 
+        private int[] deliveryDays = new int[10];
+
         private int count;
 
-        private Dictionary<int, CreateMaterialInputModel> materials = new ();
+        private Dictionary<int, CreateMaterialInputModel> materials = new Dictionary<int, CreateMaterialInputModel>();
        
-        private CreatePackageInputModel BasicPackageInputModel = new();
+        private CreatePackageInputModel BasicPackageInputModel = new CreatePackageInputModel();
 
-        private CreatePackageInputModel StandardPackageInputModel = new();
+        private CreatePackageInputModel StandardPackageInputModel = new CreatePackageInputModel();
 
-        private CreatePackageInputModel PremiumPackageInputModel = new();
+        private CreatePackageInputModel PremiumPackageInputModel = new CreatePackageInputModel();
 
-        protected override void OnInitialized()
-
+        protected override async Task OnInitializedAsync()
         {
             this.BasicPackageInputModel.PackageType = "Basic";
             this.BasicPackageInputModel.ServiceId = this.ServiceId;
@@ -59,11 +60,18 @@
             this.EditContextStandardPackage = new EditContext(this.StandardPackageInputModel);
             this.EditContextPremiumPackage = new EditContext(this.PremiumPackageInputModel);
 
-            this.EditContextBasicPackage.OnFieldChanged += this.EditContext_OnFieldChanged;
-            this.EditContextPremiumPackage.OnFieldChanged += this.EditContext_OnFieldChanged;
-            this.EditContextStandardPackage.OnFieldChanged += this.EditContext_OnFieldChanged;
+            //this.EditContextBasicPackage.OnFieldChanged += this.EditContextBasicPackage_OnFieldChanged;
+            //this.EditContextPremiumPackage.OnFieldChanged += this.EditContextPremiumPackage_OnFieldChanged;
+            //this.EditContextStandardPackage.OnFieldChanged += this.EditContextStandardPackage_OnFieldChanged;
 
-            base.OnInitialized();
+            for (int i = 0; i < deliveryDays.Length; i++)
+            {
+                deliveryDays[i] = i + 1;
+            }
+
+            this.StateHasChanged();
+
+            await base.OnInitializedAsync();
         }
 
         public void AddMaterial()
@@ -75,20 +83,19 @@
             this.StateHasChanged();
         }
 
-        protected override void OnAfterRender(bool firstRender)
-        {
-            base.OnAfterRender(firstRender);
-            this.SetSaveDisabledStatus();
-        }
+        //protected override void OnAfterRender(bool firstRender)
+        //{
+        //    base.OnAfterRender(firstRender);
+        //    this.SetSaveDisabledStatus();
+        //}
 
-        private void CheckMaterialToPackage(int packageNumber, int materialNumber)
+        private void AddMaterialToPackage(int packageNumber, int materialNumber)
         {
             switch (packageNumber)
             {
                 case 1:
                     this.BasicPackageInputModel.Materials.Add(this.materials[materialNumber]);
                     break;
-
                 case 2:
                     this.StandardPackageInputModel.Materials.Add(this.materials[materialNumber]);
                     break;
@@ -100,7 +107,25 @@
                     break;
             }
 
-            this.StateHasChanged();
+        }
+
+        private void RemoveMaterialFromPackage(int packageNumber, int materialKey)
+        {
+            switch (packageNumber)
+            {
+                case 1:
+                    this.BasicPackageInputModel.Materials.Remove(this.materials[materialKey]);
+                    break;
+                case 2:
+                    this.StandardPackageInputModel.Materials.Remove(this.materials[materialKey]);
+                    break;
+                case 3:
+                    this.PremiumPackageInputModel.Materials.Remove(this.materials[materialKey]);
+                    break;
+                default:
+                    System.Console.WriteLine("No package with that number found");
+                    break;
+            }
         }
 
         public async Task Save()
@@ -115,15 +140,33 @@
             this.NavigationManager.NavigateTo(uri);
         }
 
-
-        private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
+        public void Validate()
         {
             this.SetSaveDisabledStatus();
         }
 
+
+        //private void EditContextBasicPackage_OnFieldChanged(object sender, FieldChangedEventArgs e)
+        //{
+        //    this.SetSaveDisabledStatus();
+        //}
+
+        //private void EditContextStandardPackage_OnFieldChanged(object sender, FieldChangedEventArgs e)
+        //{
+        //    this.SetSaveDisabledStatus();
+        //}
+        //private void EditContextPremiumPackage_OnFieldChanged(object sender, FieldChangedEventArgs e)
+        //{
+        //    this.SetSaveDisabledStatus();
+        //}
+
         private void SetSaveDisabledStatus()
         {
-            if (this.EditContextStandardPackage.Validate() && this.EditContextBasicPackage.Validate() && this.EditContextPremiumPackage.Validate())
+            bool isBasicPackageValid = this.EditContextBasicPackage.Validate();
+            bool isStandardPackageValid = this.EditContextStandardPackage.Validate();
+            bool isPremiumPackageValid = this.EditContextPremiumPackage.Validate();
+
+            if (isBasicPackageValid && isStandardPackageValid && isPremiumPackageValid)
             {
                 this.Disabled = null;
             }
