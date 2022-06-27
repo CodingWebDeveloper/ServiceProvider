@@ -12,7 +12,7 @@ namespace ServiceProvider.Client.Services
 
         Task<IEnumerable<T>> GetAllByUserId<T>();
 
-        Task<double> GetStartingPrice(int serviceId);
+        Task<decimal> GetStartingPrice(int serviceId);
 
         Task<int> GetUnfinishedOrdersBy(int serviceId);
 
@@ -21,5 +21,7 @@ namespace ServiceProvider.Client.Services
         Task<T> GetById<T>(int serviceId);
 
         Task<IEnumerable<T>> GetAll<T>();
+
+        Task<int> GetRatingById(int serviceId);
     }
 }

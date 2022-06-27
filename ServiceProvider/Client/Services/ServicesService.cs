@@ -50,9 +50,14 @@ namespace ServiceProvider.Client.Services
             return await this.httpClient.GetFromJsonAsync<T>($"api/services/info/{serviceId}");
         }
 
-        public async Task<double> GetStartingPrice(int serviceId)
+        public async Task<int> GetRatingById(int serviceId)
         {
-            return await this.httpClient.GetFromJsonAsync<double>($"api/services/price/{serviceId}");
+            return await this.httpClient.GetFromJsonAsync<int>($"api/services/rating/{serviceId}");
+        }
+
+        public async Task<decimal> GetStartingPrice(int serviceId)
+        {
+            return await this.httpClient.GetFromJsonAsync<decimal>($"api/services/price/{serviceId}");
         }
 
         public async Task<int> GetUnfinishedOrdersBy(int serviceId)

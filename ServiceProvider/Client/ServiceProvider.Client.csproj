@@ -15,7 +15,6 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     <PackageReference Include="MudBlazor" Version="5.2.4" />
     <PackageReference Include="OneOf" Version="3.0.216" />
-    <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>

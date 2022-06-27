@@ -22,6 +22,6 @@ namespace ServiceProvider.Server.Services
 
         IEnumerable<T> GetAll<T>();
 
-        int CalculateRatingBy(int serviceId);
+        int GetRatingById(int serviceId);
     }
 }

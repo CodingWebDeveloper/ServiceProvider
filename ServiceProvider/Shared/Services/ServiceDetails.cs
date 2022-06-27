@@ -10,14 +10,14 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class ServiceInfoViewModel
+    public class ServiceDetails
     {
         public int Id { get; set; }
 
         public string Title { get; set; }
 
         [IgnoreMap]
-        public double Rating => this.GetAvearageRatingByReveiws();
+        public decimal Rating { get; set; }
 
         public string Description { get; set; }
 
@@ -33,34 +33,8 @@
 
         public IEnumerable<ReviewViewModel> Reviews { get; set; }
 
-        public int ReviewsCount => this.GetReviewsCount();
+        //public IEnumerable<PackageViewModel> Packages { get; set; }
 
-        public IEnumerable<PackageViewModel> Packages { get; set; }
-
-        public IEnumerable<RequirementViewModel> Requirements { get; set; }
-
-        private  int GetReviewsCount()
-        {
-            if (!(this.Reviews is null))
-            {
-                return this.Reviews.Count();
-            }
-
-            return 0;
-        }
-
-        private double GetAvearageRatingByReveiws() 
-        {
-            if(!(this.Reviews is null))
-            {
-                if(this.Reviews.Any())
-                {
-                    return Math.Ceiling((double)this.Reviews.Sum(r => r.Rate) / (double)this.ReviewsCount);
-                }
-            }
-
-            return 0;
-        }
-
+        //public IEnumerable<RequirementViewModel> Requirements { get; set; }
     }
 }

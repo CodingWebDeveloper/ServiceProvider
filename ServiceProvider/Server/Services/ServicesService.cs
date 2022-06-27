@@ -24,7 +24,7 @@ namespace ServiceProvider.Server.Services
             this.mapper = mapper;
         }
 
-        public int CalculateRatingBy(int serviceId)
+        public int GetRatingById(int serviceId)
         {
             IEnumerable<Review> reviews = this.dbContext.Reviews;
             int rating = (int)Math.Round(reviews.Sum(r => r.Rate) / reviews.Count());

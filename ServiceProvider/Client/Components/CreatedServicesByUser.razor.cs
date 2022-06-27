@@ -30,11 +30,11 @@ namespace ServiceProvider.Client.Components
         private async Task LoadServices()
         {
             this.services = await this.ServicesService.GetAllByUserId<ServiceViewModel>();
-            //foreach (var service in this.services)
-            //{
-            //    service.StartingPrice = await this.ServicesService.GetStartingPrice(service.Id);
-            //    service.Rating = await this.ServicesService.Cal
-            //}
+            foreach (var service in this.services)
+            {
+                service.StartingPrice = await this.ServicesService.GetStartingPrice(service.Id);
+                service.Rating = await this.ServicesService.GetRatingById(service.Id);
+            }
 
             this.StateHasChanged();
         }

@@ -39,7 +39,7 @@ namespace ServiceProvider.Server.Controllers
             foreach (var service in services)
             {
                 service.StartingPrice = this.servicesService.GetStartingPrice(service.Id);
-                service.Rating = this.servicesService.CalculateRatingBy(service.Id);
+                service.Rating = this.servicesService.GetRatingById(service.Id);
             }
 
             return this.Ok(services);
@@ -54,7 +54,7 @@ namespace ServiceProvider.Server.Controllers
         [HttpGet("info/{serviceId}")]
         public IActionResult GetById([FromRoute] int serviceId)
         {
-            return this.Ok(this.servicesService.GetById<ServiceInfoViewModel>(serviceId));
+            return this.Ok(this.servicesService.GetById<ServiceDetails>(serviceId));
         }
 
         [HttpGet("unfinished-orders/{serviceId}")]
@@ -74,6 +74,12 @@ namespace ServiceProvider.Server.Controllers
         public IActionResult GetAll()
         {
             return this.Ok(this.servicesService.GetAll<ServiceViewModel>());
+        }
+
+        [HttpGet("rating/{serviceId}")]
+        public IActionResult GetRatingById([FromRoute]int serviceId)
+        {
+            return this.Ok(this.servicesService.GetRatingById(serviceId));
         }
     }
 }

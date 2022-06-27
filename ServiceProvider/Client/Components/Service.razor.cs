@@ -21,33 +21,15 @@ namespace ServiceProvider.Client.Components
         [Inject]
         public IApplicationUsersService ApplicationUsersService { get; set; }
 
-        [Inject]
-        public IJSRuntime JS { get; set; }
-
-        private ServiceInfoViewModel service= new();
+        private ServiceDetails service= new ServiceDetails();
 
         protected override async Task OnInitializedAsync()
         {
-            this.service = await this.ServicesService.GetById<ServiceInfoViewModel>(this.ServiceId);
-            this.service.Creator = await this.ApplicationUsersService.GetById<UserViewModel>();
-            this.service.CurrentPendingOrdersCount = await this.ServicesService.GetUnfinishedOrdersBy(this.ServiceId);
-            this.StateHasChanged();
+            this.service = await this.ServicesService.GetById<ServiceDetails>(this.ServiceId);
+            //this.service.Creator = await this.ApplicationUsersService.GetById<UserViewModel>();
+            //this.service.CurrentPendingOrdersCount = await this.ServicesService.GetUnfinishedOrdersBy(this.ServiceId);
+
             await base.OnInitializedAsync();
-            if(this.service.Images.Any())
-            {
-                await this.JS.InvokeVoidAsync("showSlides", 1);
-            }
-           
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if(firstRender)
-            {
-                await this.JS.InvokeVoidAsync("openPackage", "Basic");
-            }
-
-            await base.OnAfterRenderAsync(firstRender);
         }
     }
 }
