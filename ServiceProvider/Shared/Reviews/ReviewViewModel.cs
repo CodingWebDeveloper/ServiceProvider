@@ -16,7 +16,7 @@
 
         public int ServiceId { get; set; }
 
-        public double Rate { get; set; }
+        public int Rate { get; set; }
 
         //public DateTime CreatedOn { get; set; }
     }

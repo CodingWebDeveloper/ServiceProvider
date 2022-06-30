@@ -17,7 +17,7 @@
         public string Title { get; set; }
 
         [IgnoreMap]
-        public decimal Rating { get; set; }
+        public int Rating { get; set; }
 
         public string Description { get; set; }
 
@@ -33,8 +33,9 @@
 
         public IEnumerable<ReviewViewModel> Reviews { get; set; }
 
-        //public IEnumerable<PackageViewModel> Packages { get; set; }
+        [IgnoreMap]
+        public IEnumerable<PackageViewModel> Packages { get; set; }
 
-        //public IEnumerable<RequirementViewModel> Requirements { get; set; }
+        public IEnumerable<RequirementViewModel> Requirements { get; set; }
     }
 }

@@ -12,6 +12,7 @@
 
         public string Title { get; set; }
 
+        [IgnoreMap]
         public int Rating { get; set; }
 
         [IgnoreMap]

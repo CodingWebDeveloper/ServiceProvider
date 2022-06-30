@@ -78,6 +78,7 @@ namespace ServiceProvider.Server
                     var db = serviceProvider.GetRequiredService<ApplicationDbContext>();
                     db.Database.Migrate();
                 }
+
                 if (env.IsDevelopment())
                 {
                     app.UseDeveloperExceptionPage();

@@ -11,8 +11,9 @@ namespace ServiceProvider.Server.Profiles
         public ApplicationUserMappingProfile()
         {
             this.CreateMap<ApplicationUser, UserViewModel>()
-                .ForMember(x => x.UserName, y => y.MapFrom(u => u.UserName))
-                .ForMember(x => x.CountOfReviews, y => y.MapFrom(u => u.Services.Sum(s => s.Reviews.Count)));
+                .ForMember(x => x.UserName, y => y.MapFrom(u => u.UserName));
+
+            this.CreateMap<ApplicationUser, EditUserInputModel>();
         }
     }
 }

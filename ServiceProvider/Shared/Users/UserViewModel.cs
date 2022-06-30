@@ -12,23 +12,29 @@ namespace ServiceProvider.Shared.Users
     {
         public string Id { get; set; }
 
+        public string Email { get; set; }
+
         public string UserName { get; set; }
+        
         public string FirstName { get; set; }
 
+        public string NameInitials => this.FirstName.Substring(0, 1) + this.LastName.Substring(0, 1);
+        
         public string LastName { get; set; }
 
         [IgnoreMap]
-        public double Rating { get; set; }
+        public int Rating { get; set; }
 
         public string ProfilePictureUrl { get; set; }
-
-        public int CountOfReviews { get; set; } = 0;
 
         public string Description { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
         public IEnumerable<SkillViewModel> Skills { get; set; }
+
+        [IgnoreMap]
+        public string Test { get; set; }
 
     }
 }

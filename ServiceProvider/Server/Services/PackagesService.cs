@@ -1,4 +1,5 @@
-﻿using ServiceProvider.Server.Data;
+﻿using AutoMapper;
+using ServiceProvider.Server.Data;
 using ServiceProvider.Server.Models;
 using ServiceProvider.Server.Models.Enums;
 using ServiceProvider.Shared.PackageModels;
@@ -12,10 +13,14 @@ namespace ServiceProvider.Server.Services
     public class PackagesService : IPackagesService
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IMapper mapper;
 
-        public PackagesService(ApplicationDbContext dbContext)
+        public PackagesService(
+            ApplicationDbContext dbContext,
+            IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         public async Task CreateAsync(CreatePackageInputModel inputModel)
@@ -58,6 +63,11 @@ namespace ServiceProvider.Server.Services
 
             await this.dbContext.Packages.AddAsync(package);
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAllBy<T>(int serviceId)
+        {
+            return this.mapper.ProjectTo<T>(this.dbContext.Packages.Where(p => p.ServiceId == serviceId));
         }
     }
 }

@@ -24,9 +24,9 @@ namespace ServiceProvider.Server.Models
 
         public string LastName { get; set; }
 
-        public double Rating { get; set; } = 0;
-
         public string ProfilePictureUrl { get; set; }
+
+        public string Description { get; set; }
 
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 

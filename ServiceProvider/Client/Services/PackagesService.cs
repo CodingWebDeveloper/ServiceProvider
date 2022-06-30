@@ -19,7 +19,12 @@ namespace ServiceProvider.Client.Services
 
         public async Task CreateAsync(CreatePackageInputModel inputModel)
         {
-            await this.httpClient.PostAsJsonAsync("api/packages", inputModel);
+            await this.httpClient.PostAsJsonAsync("api/packages/create", inputModel);
+        }
+
+        public async Task<IEnumerable<T>> GetAllBy<T>(int serviceId)
+        {
+            return await this.httpClient.GetFromJsonAsync<IEnumerable<T>>($"api/packages/by-service-id/{serviceId}");
         }
     }
 }

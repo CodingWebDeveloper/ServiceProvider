@@ -7,7 +7,7 @@
 
 <MudItem Class="d-flex my-3">
     <MudSpacer/>
-    <MudButton Variant="Variant.Filled" OnClick="OpenCreateForm">Create skill</MudButton>
+    <MudButton Variant="Variant.Filled" OnClick="ToggleCreateSkillForm">@this.buttonToggleText</MudButton>
 </MudItem>
 
 <MudTable Items="@this.skills" Dense="false" Hover="true" Bordered="false" Striped="true">

@@ -221,8 +221,33 @@
         width: 100%;
         }
     }
+
+    .default-img-holder{
+        padding: 1.5px;
+        border-radius: 50%;
+        height:80%;
+        width:80%;
+    }
 </style>
 <MudText Typo="Typo.h3">@this.service.Title</MudText>
+<MudItem>
+    @if(this.service?.Creator != null)
+    {
+         @if (string.IsNullOrEmpty(this.service.Creator.ProfilePictureUrl))
+         {
+             <MudAvatar Style="height: 150px; width:150px; font-size: 2rem" Color="Color.Default">
+                 @if(!(string.IsNullOrEmpty(this.service.Creator.FirstName) && string.IsNullOrEmpty(this.service.Creator.LastName)))
+                 {
+                     @this.service.Creator.NameInitials
+                 }
+             </MudAvatar>
+         }
+         else
+         {
+             <MudAvatar Style="height:150px; width: 150px;" Image="@this.service.Creator.ProfilePictureUrl" />
+         }
+    }
+</MudItem>
 
 
 

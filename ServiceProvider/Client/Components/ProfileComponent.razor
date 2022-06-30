@@ -1,0 +1,141 @@
+﻿
+<MudText Typo="Typo.h2" Class="font-weight-bold mb-5">Profile </MudText>
+<MudItem Class="d-flex flex-column flex-sm-row align-items-center">
+   @if (string.IsNullOrEmpty(this.viewModel.ProfilePictureUrl))
+    {
+        <MudAvatar Style="height: 150px; width:150px; font-size: 2rem" Color="Color.Default">
+            @if(!(string.IsNullOrEmpty(this.viewModel.FirstName) && string.IsNullOrEmpty(this.viewModel.LastName)))
+            {
+                @this.viewModel.NameInitials
+            }
+        </MudAvatar>
+    }
+    else
+    {
+        <MudAvatar Style="height:150px; width: 150px;" Image="@this.viewModel.ProfilePictureUrl" />
+    }
+    <MudItem Class="ml-3">
+        <MudText Typo="Typo.h4" Style="word-break:normal;width:100px;" >
+            @this.viewModel.FirstName @this.viewModel.LastName
+        </MudText>
+        <MudText Typo="Typo.h6" Class="text-black-50">
+            @this.viewModel.Email
+        </MudText>
+        <MudItem Class="d-flex">
+            <MudText Align="Align.Center" Class="font-weight-bold">
+                <MudRating ReadOnly="true" SelectedValue="@this.viewModel.Rating" Color="Color.Default"/>
+            </MudText>
+            <MudSpacer />
+            <MudButton Color="Color.Success" Variant="Variant.Outlined" Size="Size.Small">
+                Update
+            </MudButton>
+        </MudItem>
+    </MudItem>
+</MudItem>
+<MudGrid Class="mt-10">
+    <MudItem sm="12" md="7">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudItem Class="box-container shadow">
+                    <MudText id="userdescription" Class="p-3 text-black-50 overflow-hidden" Style="margin-bottom: 40px; height:173px;">
+                        @this.viewModel.Description
+                       </MudText>
+                    <MudButton Class="position-absolute" Style="bottom: 0%;" Color="Color.Success" FullWidth="true" OnClick="this.ToggleDescription">
+                        @if (this.decriptionToggled)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.KeyboardArrowDown" Color="Color.Info" Size="Size.Large" />
+                        }
+                        else
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Info" Size="Size.Large" />
+                        }
+                    </MudButton>
+                </MudItem>
+            </MudItem>
+            <MudItem xs="12">
+                <Skills/>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudItem sm="12" md="5">
+        <MudCard >
+            <MudCardHeader>
+                <MudText Typo="Typo.h4">
+                    Analitics
+                </MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudPaper MinHeight="20vh">
+                    <MudItem Class="d-flex p-2">
+                        <MudText Typo="Typo.h6">
+                            Pending Requests
+                        </MudText>
+                        <MudSpacer/>
+                        <MudButton>
+                            View All
+                        </MudButton>
+                        <MudChip Size="Size.Small" Color="Color.Default" >
+                            6
+                        </MudChip>
+                    </MudItem>
+                    <MudList Class="list-data">
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                    </MudList>
+                </MudPaper>
+                
+                <MudPaper MinHeight="20vh" Class="mt-5">
+                    <MudItem Class="d-flex p-2">
+                        <MudText Typo="Typo.h6">
+                            Finished
+                        </MudText>
+                        <MudSpacer />
+                        <MudButton>
+                            View All
+                        </MudButton>
+                        <MudChip Size="Size.Small" Color="Color.Default">
+                            15+
+                        </MudChip>
+                    </MudItem>
+                    <MudList Class="list-data">
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                        <MudListItem>
+                            s
+                        </MudListItem>
+                    </MudList>
+                </MudPaper>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+

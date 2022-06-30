@@ -26,8 +26,15 @@ namespace ServiceProvider.Server.Services
 
         public int GetRatingById(int serviceId)
         {
-            IEnumerable<Review> reviews = this.dbContext.Reviews;
-            int rating = (int)Math.Round(reviews.Sum(r => r.Rate) / reviews.Count());
+            IEnumerable<Review> reviews = this.dbContext.Reviews.Where(r=>r.ServiceId == serviceId).ToList();
+            int sumRate = reviews.Sum(r => r.Rate);
+            int reviewsCount = reviews.Count();
+            if (sumRate == 0 || reviewsCount == 0)
+            {
+                return 0;
+            }
+
+            int rating = (int)Math.Ceiling((double)(sumRate / reviews.Count()));
             return rating;
         }
 

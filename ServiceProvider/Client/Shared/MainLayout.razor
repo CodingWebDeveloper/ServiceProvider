@@ -20,14 +20,14 @@
    
     <MudDrawer @bind-Open="sidebarOpen" Elevation="1">
         <MudDrawerHeader>
-            <MudAvatar Color="Color.Transparent" Size="Size.Large" Image="logo/logo.jpg" />
+            <MudAvatar Color="Color.Transparent" Size="Size.Large" Image="logo/logo.jpg"  />
             <MudText Typo="Typo.h5" Style="margin-top: 10px; margin-left:15px;">SERVICE PROVIDER</MudText>
         </MudDrawerHeader>
         <MudNavMenu>
             <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home">Home</MudNavLink>
             <AuthorizeView>
                 <MudNavGroup Icon="@Icons.Filled.ManageAccounts" Title="Manage Profile">
-                    <MudNavLink Icon="@Icons.Material.Filled.RemoveRedEye" Href="/profile">View My Account</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.Filled.RemoveRedEye" Href="users/profile">View My Account</MudNavLink>
                     @*<MudNavLink Class="mr-2 text-decoration-none" Href="authentication/profile">@context.User.Identity.Name</MudNavLink>*@
                     <MudNavLink>
                         <MudButton Class="nav-link" Variant="Variant.Filled" Color="Color.Warning" OnClick="this.BeginSignOut">

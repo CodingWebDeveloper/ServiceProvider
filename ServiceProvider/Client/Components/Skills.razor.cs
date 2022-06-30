@@ -20,9 +20,23 @@ namespace ServiceProvider.Client.Components
 
         private bool openCreateForm;
 
+        private string buttonToggleText = "Create Skill";
+
         private int nr = 1;
 
-        private void OpenCreateForm() => this.openCreateForm = !this.openCreateForm;
+        private void ToggleCreateSkillForm()
+        {
+            if (this.openCreateForm)
+            {
+                this.buttonToggleText = "Create Skill";
+            }
+            else
+            {
+                this.buttonToggleText = "Cancel";
+            }
+
+            this.openCreateForm = !this.openCreateForm;
+        }
 
         protected override async Task OnInitializedAsync()
         {

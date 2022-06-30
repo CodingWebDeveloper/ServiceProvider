@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceProvider.Shared.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -18,7 +19,12 @@ namespace ServiceProvider.Client.Services
 
         public async Task<T> GetById<T>()
         {
-            return await this.httpClient.GetFromJsonAsync<T>("api/application-users");
+            return await this.httpClient.GetFromJsonAsync<T>("api/application-users/by-id");
+        }
+
+        public async Task UpdateAsync(EditUserInputModel inputModel)
+        {
+            await this.httpClient.PutAsJsonAsync<EditUserInputModel>("api/application-users/update", inputModel);
         }
     }
 }

@@ -9,5 +9,7 @@ namespace ServiceProvider.Server.Services
     public interface IPackagesService
     {
         Task CreateAsync(CreatePackageInputModel inputModel);
+
+        IEnumerable<T> GetAllBy<T>(int serviceId);
     }
 }

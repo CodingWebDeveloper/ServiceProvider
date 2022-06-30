@@ -15,7 +15,7 @@ namespace ServiceProvider.Server.Models
 
         public virtual ApplicationUser Creator { get; set; }
 
-        public double Rate { get; set; } = 0;
+        public int Rate { get; set; } = 0;
 
         public string Content { get; set; }
 

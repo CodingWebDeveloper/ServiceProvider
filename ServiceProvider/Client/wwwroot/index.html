@@ -53,48 +53,17 @@
             }
         }
     </script>
-    <!--<script>
-        let slideIndex = 1;
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("slides");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+    <script>
+        function toggleDescription() {
+            let description = document.getElementById("userdescription");
+            if (description.style.height != "unset") {
+                description.style.height = "unset";
             }
-
-            slides[slideIndex - 1].style.display = "block";
-        }
-
-        let viewPackages = document.getElementsByClassName("view-package");
-        let packages = document.getElementsByClassName("package-body");
-
-        function openPackage(package) {
-            for (var i = 0; i < packages.length; i++) {
-                let id = packages[i].getAttribute("id");
-                let packageType = package.getAttribute("id");
-                if (id == packageType) {
-                    closePakcages();
-                    packages[i].style.display = "block";
-                }
+            else {
+                description.style.height = "173px";
             }
         }
-
-        function closePakcages() {
-            for (var i = 0; i < packages.length; i++) {
-                packages[i].style.display = "none";
-            }
-        }
-    </script>-->
+    </script>
     <script>
         function CopyToClipboard(id) {
             var r = document.createRange();

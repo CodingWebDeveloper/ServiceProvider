@@ -21,12 +21,18 @@ namespace ServiceProvider.Server.Controllers
             this.packagesService = packagesService;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreatePackage(CreatePackageInputModel inputModel)
         {
             await this.packagesService.CreateAsync(inputModel);
 
             return this.Ok();
+        }
+
+        [HttpGet("by-service-id/{serviceId}")]
+        public IActionResult GetAllBy([FromRoute]int serviceId)
+        {
+            return this.Ok(this.packagesService.GetAllBy<PackageViewModel>(serviceId));
         }
     }
 }
